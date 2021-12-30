@@ -1,759 +1,561 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+﻿<!DOCTYPE html>
+<html>
+
 <head>
-  <title>Basic Primitives Diagrams</title>
-  <script>
-    var frameworksOrder = ["javascript", "pdfkit"];
-    var frameworksLabels = {
-      "javascript": "JavaScript",
-      "pdfkit": "PDFkit"
-    };
-    var preferredFramework = "javascript";
-    var activeFile;
-    var samplesHash = {};
-    var files = [
-      {
-        label: "Organizational Chart",
-        items: [
-          {
-            label: "Large Hierarchy",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoLargeHierarchy.html",
-              pdfkit: "samples/pdfkit.plugins/DemoLargeHierarchy.html"
-            }
-          },
-          {
-            label: "Dynamic Data Loading",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoDynamicLoading.html"
-            }
-          },
-          {
-            label: "Matrix Layout",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoOrgDiagramMatrixLayout.html",
-              pdfkit: "samples/pdfkit.plugins/DemoOrgDiagramMatrixLayout.html"
-            }
-          },
-          {
-            label: "Vertical Layout",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoVerticalLayout.html"
-            }
-          },
-          {
-            label: "Cross-branch alignment",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoCrossBranchAlignment.html"
-            }
-          },
-          {
-            label: "Cross Team Working Group",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoCrossTeamGroup.html"
-            }
-          },
-          {
-            label: "Partners & Annotations",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoPartners.html"
-            }
-          },
-          {
-            label: "Demo Highlight & Connector Annotations",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoHighlightAndAnnotations.html"
-            }
-          }
-        ]
+  <title>Comstock 3 Tech Tree Chart</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="primitives.js"></script>
+  <script type="text/javascript" src="javascriptsamples.js"></script>
+  <script type="text/javascript" src="data/comstock4_techtree.js"></script>
+  <link href="css/styles.css" media="screen" rel="stylesheet" type="text/css" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<link href="css/primitives.css" media="screen" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    var control = null;
+    var timer;
+
+    var optionsRender = javascriptsamples.getFamDiagramOptionsRender([], {
+      /* Family Diagram Specific Options */
+      neighboursSelectionMode: primitives.NeighboursSelectionMode.ParentsChildrenSiblingsAndSpouses,
+      groupByType: primitives.GroupByType.Children,
+      alignBylevels: true,
+      hideGrandParentsConnectors: true,
+      enableMatrixLayout: false,
+      minimumMatrixSize: 0,
+      maximumColumnsInMatrix: 6,
+
+      /* On-screen annotations specific options */
+      AnnotationOptions: {
+        connectorPlacementType: primitives.ConnectorPlacementType.Offbeat,
+        connectorShapeType: primitives.ConnectorShapeType.OneWay,
+        labelPlacementType: primitives.ConnectorLabelPlacementType.Between,
+        lineWidth: 2,
+        lineType: primitives.LineType.Dashed,
+        color: primitives.Colors.Red,
+        offset: 5,
+        zOrderType: primitives.ZOrderType.Auto
       },
-      {
-        label: "Family Chart",
-        items: [
-          {
-            label: "Family Tree Nodes Ordering",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoFamilyOrdering.html"
-            }
-          },
-          {
-            label: "Family Chart & Annotations",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoFamily.html"
-            }
-          },
-          {
-            label: "Tech Tree Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoTechTree.html"
-            }
-          },
-          {
-            label: "Financial Ownership Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoFinancialOwnership.html"
-            }
-          },
-          {
-            label: "Mutual Financial Ownership Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoMutualFinancialOwnership.html"
-            }
-          },
-          {
-            label: "Dependencies Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoDependencies.html"
-            }
-          },
-          {
-            label: "Patents & Hiding grand parents connectors",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoPatents.html"
-            }
-          }
-        ]
+      /* Layout */
+      pageFitMode: primitives.PageFitMode.FitToPage,
+      orientationType: primitives.OrientationType.Top,
+      verticalAlignment: primitives.VerticalAlignmentType.Middle,
+      horizontalAlignment: primitives.HorizontalAlignmentType.Center,
+      childrenPlacementType: primitives.ChildrenPlacementType.Horizontal,
+      leavesPlacementType: primitives.ChildrenPlacementType.Horizontal,
+      maximumColumnsInMatrix: 6,
+      minimalVisibility: primitives.Visibility.Dot,
+      minimumVisibleLevels: 0,
+      selectionPathMode: primitives.SelectionPathMode.FullStack,
+
+      hasButtons: primitives.Enabled.True,
+      hasSelectorCheckbox: primitives.Enabled.False,
+      selectCheckBoxLabel: "Pinned",
+      itemTitleFirstFontColor: primitives.Colors.White,
+      itemTitleSecondFontColor: primitives.Colors.White,
+      buttonsPanelSize: 32,
+      groupTitlePanelSize: 24,
+      checkBoxPanelSize: 24,
+
+      /* group title options */
+      groupTitlePlacementType: primitives.AdviserPlacementType.Left,
+      groupTitleOrientation: primitives.TextOrientationType.RotateRight,
+      groupTitleVerticalAlignment: primitives.VerticalAlignmentType.Middle,
+      groupTitleHorizontalAlignment: primitives.HorizontalAlignmentType.Center,
+      groupTitleFontSize: "8px",
+      groupTitleFontFamily: "Roboto",
+      groupTitleColor: primitives.Colors.Gray,
+      groupTitleFontWeight: "normal",
+      groupTitleFontStyle: "normal",
+
+      /* level title options */
+      addLevelAnnotations: false,
+      levelTitlePlacementType: primitives.AdviserPlacementType.Left,
+      levelTitlePanelSize: 24,
+      levelTitlePlaceInside: false,
+      levelTitleOrientation: primitives.TextOrientationType.Auto,
+      levelTitleVerticalAlignment: primitives.VerticalAlignmentType.Middle,
+      levelTitleHorizontalAlignment: primitives.HorizontalAlignmentType.Center,
+      levelTitleFontSize: "12px",
+      levelTitleFontFamily: "Roboto",
+      levelTitleFontColor: primitives.Colors.White,
+      levelTitleColor: primitives.Colors.Gray,
+      levelTitleFontWeight: "normal",
+      levelTitleFontStyle: "normal",
+
+      /* Template */
+      DefaultTemplateOptions: {
+        minimizedItemCornerRadius: 12,
+        minimizedItemSize: new primitives.Size(6, 6),
+        highlightPadding: 3,
+        minimizedItemShapeType: primitives.ShapeType.None,
+        minimizedItemLineWidth: 0,
+        minimizedItemLineType: primitives.LineType.Solid,
+        minimizedItemBorderColor: null,
+        minimizedItemFillColor: null,
+        minimizedItemOpacity: 1.0
       },
-      {
-        label: "Integration",
-        items: [
-          {
-            label: "AngularJS Directive Example",
-            frameworks: {
-              javascript: "samples/angularjs.directives/CaseAngularJSFirstOrganizationalChartDirective.html"
-            }
-          },
-          {
-            label: "jQuery UI Widget Example",
-            frameworks: {
-              javascript: "samples/jquery.widgets/CaseFirstOrganizationalChartWidget.html"
-            }
-          },
-          {
-            label: "Vanilla JavaScript Drag & Drop Demo",
-            frameworks: {
-              javascript: "samples/javascript.controls/DemoDragNDrop.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "PDFkit Specific Use Cases",
-        items: [
-          {
-            label: "Auto size Organizational Chart to fit into Page",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/AutoSizeOrgDiagram.html"
-            }
-          },
-          {
-            label: "Auto size Page to fit Organizational Chart",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/AutoSizePageToFitOrgDiagram.html"
-            }
-          },
-          {
-            label: "Auto size Family Chart to fit into Page",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/AutoSizeFamDiagram.html"
-            }
-          },
-          {
-            label: "Auto size Page to Family Chart",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/AutoSizePageToFitFamDiagram.html"
-            }
-          },
-          {
-            label: "PDF File Download Sample",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/FileDownload.html"
-            }
-          },
-          {
-            label: "Multi-page Document Example",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/Multipage.html"
-            }
-          },
-          {
-            label: "User Item Template with custom graphics",
-            frameworks: {
-              pdfkit: "samples/pdfkit.plugins/UserItemTemplateWithShapes.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Create & Update use cases",
-        items: [
-          {
-            label: "First Organizational Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseFirstOrganizationalChart.html",
-              pdfkit: "samples/pdfkit.plugins/FirstOrganizationalChart.html"
-            }
-          },
-          {
-            label: "First Family Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseFirstFamilyChart.html",
-              pdfkit: "samples/pdfkit.plugins/FirstFamilyChart.html"
-            }
-          },
-          {
-            label: "Adding new items to chart at runtime",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseAddingNewItemsToChartAtRuntime.html"
-            }
-          },
-          {
-            label: "Page Size Organizational Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CasePageSizeDiagram.html"
-            }
-          },
-          {
-            label: "Auto size diagram in article",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseAutoSize.html"
-            }
-          },
-          {
-            label: "Popup Dialog",
-            frameworks: {
-              javascript: "samples/javascript.controls/CasePopupDialog.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "User interface events & options",
-        items: [
-          {
-            label: "Selecting cursor item",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSelectingCursorItem.html"
-            }
-          },
-          {
-            label: "Selecting highlight item",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSelectingHighlightItem.html"
-            }
-          },
-          {
-            label: "Selected items & Check boxes",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSelectedItems.html"
-            }
-          },
-          {
-            label: "Frame",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseShowFrame.html"
-            }
-          },
-          {
-            label: "Buttons panel",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseButtonsPanel.html"
-            }
-          },
-          {
-            label: "Item and group title colors",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseItemAndGroupTitleColors.html",
-              pdfkit: "samples/pdfkit.plugins/ItemAndGroupTitleColors.html"
-            }
-          },
-          {
-            label: "Group title - Custom Template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseGroupTitleTemplate.html",
-              pdfkit: "samples/pdfkit.plugins/GroupTitleTemplate.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Organizational Chart Layout Options",
-        items: [
-          {
-            label: "Children Placement",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseChildrenPlacementType.html",
-              pdfkit: "samples/pdfkit.plugins/ChildrenPlacementType.html"
-            }
-          },
-          {
-            label: "Cross-branch alignment",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseCrossBranchAlignment.html"
-            }
-          },
-          {
-            label: "Children & Assistants Levels",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseChildrenAndAssistantsLevelOffset.html"
-            }
-          },
-          {
-            label: "Adviser and Assistant item types",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseAdviserAndAssistantItemTypes.html"
-            }
-          },
-          {
-            label: "SubAdviser and SubAssistant item types",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSubAdviserAndSubAssistantItemTypes.html"
-            }
-          },
-          {
-            label: "General Partner item type",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseGeneralPartnerItemType.html"
-            }
-          },
-          {
-            label: "Limited Partner item type",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseLimitedPartnerItemType.html"
-            }
-          },
-          {
-            label: "Adviser Partner item type",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseAdviserPartnerItemType.html"
-            }
-          },
-          {
-            label: "Multiple root items in chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseMultipleRootItemsInChart.html"
-            }
-          },
-          {
-            label: "Matrix layout of multiple root items in chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseMatrixLayoutOfMultipleRootItemsInChart.html"
-            }
-          },
-          {
-            label: "Selection path mode",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSelectionPathMode.html"
-            }
-          },
-          {
-            label: "Inactive Items in layout",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseInactiveItems.html"
-            }
-          },
-          {
-            label: "Custom layout with invisible items",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseCustomLayoutWithInvisibleItems.html"
-            }
-          },
-          {
-            label: "Skip levels with invisible items",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSkippedLevels.html"
-            }
-          },
-          {
-            label: "Advisers children placement",
-            frameworks: {
-              javascript: "samples/javascript.controls/CasePlaceAdvisersAboveChildren.html"
-            }
-          },
-          {
-            label: "Assistants children placement",
-            frameworks: {
-              javascript: "samples/javascript.controls/CasePlaceAssistantsAboveChildren.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Family Diagram Layout Use Cases",
-        items: [
-          {
-            label: "Inactive Family Items in layout",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseInactiveFamilyItems.html"
-            }
-          },
-          {
-            label: "Family Relations Bundling",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseFamilyChartRelations.html"
-            }
-          },
-          {
-            label: "Matrix Nodes layout in Family Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseMatrixLayoutInFamilyChart.html",
-              pdfkit: "samples/pdfkit.plugins/FamilyMatrix.html"
-            }
-          },
-          {
-            label: "Matrix Groups in Family Chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseMatrixGroupsInFamilyChart.html",
-              pdfkit: "samples/pdfkit.plugins/FamilyMatrixGroups.html"
-            }
-          },
-          {
-            label: "Labels cascades over connection lines in family chart. Custom label template.",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseLabelsCascadesInFamilyChart.html",
-              pdfkit: "samples/pdfkit.plugins/LabelsCascadesInFamilyChart.html"
-            }
-          },
-          {
-            label: "Labels over matrix shaped nodes connection lines in family chart",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseLabelsNMatrixInFamilyChart.html"
-            }
-          },
-          {
-            label: "Nodes ordering",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseFamilyChartItemsOrdering.html",
-              pdfkit: "samples/pdfkit.plugins/FamilyChartItemsOrdering.html"
-            }
-          },
-          {
-            label: "Families ordering",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseMultipleFamiliesOrdering.html"
-            }
-          },
-          {
-            label: "Primary Parent",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseFamilyChartPrimaryParent.html"
-            }
-          },
-          {
-            label: "Loops Layout Optimization",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseLoopsInFamilyChart.html",
-              pdfkit: "samples/pdfkit.plugins/LoopsInFamilyChart.html"
-            }
-          },
-          {
-            label: "Selection Path",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSelectionPathModeInFamilyChart.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Item Template Use Cases",
-        items: [
-          {
-            label: "Item template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseItemTemplate.html",
-              pdfkit: "samples/pdfkit.plugins/UserItemTemplate.html"
-            }
-          },
-          {
-            label: "Adding Link To Item Template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseAddingLinkToItemTemplate.html"
-            }
-          },
-          {
-            label: "Zoom using item template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseZoomWithItemTemplate.html"
-            }
-          },
-          {
-            label: "Zoom using CSS Scale Transform",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseZoomWithCSSScaleTransform.html"
-            }
-          },
-          {
-            label: "Labels & Item Template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseItemTemplateLabel.html"
-            }
-          },
-          {
-            label: "Selection Checkbox Inside Item Template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseSelectionCheckboxInItemTemplate.html"
-            }
-          },
-          {
-            label: "Cursor Template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseCursorTemplate.html"
-            }
-          },
-          {
-            label: "Highlight template",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseHighlightTemplate.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Annotations",
-        items: [
-          {
-            label: "On-screen Connector Annotation",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseConnectorAnnotation.html"
-            }
-          },
-          {
-            label: "Shape & Background Annotations",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseShapeAnnotation.html",
-              pdfkit: "samples/pdfkit.plugins/ShapeAnnotation.html"
-            }
-          },
-          {
-            label: "Level Annotation",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseLevelAnnotation.html",
-              pdfkit: "samples/pdfkit.plugins/LevelAnnotation.html"
-            }
-          },
-          {
-            label: "Level Annotation - Custom Templates",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseLevelAnnotationTemplate.html"
-            }
-          },
-          {
-            label: "Highlight Path Annotation",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseHighlightPathAnnotation.html"
-            }
-          },
-          {
-            label: "PERT chart & Critical Path Visualization",
-            frameworks: {
-              javascript: "samples/javascript.controls/CasePERTChart.html"
-            }
-          },
-          {
-            label: "Routing Highlight Path Annotation for hidden grand parents connections",
-            frameworks: {
-              javascript: "samples/javascript.controls/CaseFamilyHideGrandParentsConnections.html",
-              pdfkit: "samples/pdfkit.plugins/HideGrandParentsConnectors.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Interactive Tests",
-        items: [
-          {
-            label: "Rotated Text",
-            frameworks: {
-              javascript: "samples/javascript.controls/TestText.html"
-            }
-          },
-          {
-            label: "Callout Shape",
-            frameworks: {
-              javascript: "samples/javascript.controls/TestCallout.html"
-            }
-          },
-          {
-            label: "Shape Annotation",
-            frameworks: {
-              javascript: "samples/javascript.controls/TestShape.html"
-            }
-          },
-          {
-            label: "Connector Annotation",
-            frameworks: {
-              javascript: "samples/javascript.controls/TestConnector.html"
-            }
-          }
-        ]
-      },
-      {
-        label: "Reference",
-        items: [
-          {
-            label: "Controls Processing Diagram",
-            frameworks: {
-              javascript: "samples/javascript.controls/TestProcessingDiagram.html"
-            }
-          }
-        ]
-      }
-    ];
+
+      /* Intervals */
+      normalLevelShift: 15,
+      dotLevelShift: 12,
+      lineLevelShift: 12,
+      normalItemsInterval: 12,
+      dotItemsInterval: 12,
+      lineItemsInterval: 20,
+      cousinsIntervalMultiplier: 0,
+
+      /* Connectors */
+      arrowsDirection: primitives.GroupByType.Parents,
+      showExtraArrows: false,
+      extraArrowsMinimumSpace: 30,
+      connectorType: primitives.ConnectorType.Squared,
+      elbowType: primitives.ElbowType.Round,
+      bevelSize: 4,
+      elbowDotSize: 4,
+      linesType: primitives.LineType.Solid,
+      linesColor: primitives.Colors.Gray,
+      linesWidth: 1,
+
+      /* Labels */
+      showLabels: primitives.Enabled.Auto,
+      labelSize: new primitives.Size(60, 40),
+      labelOrientation: primitives.TextOrientationType.Horizontal,
+      labelPlacement: primitives.PlacementType.Top,
+      labelOffset: 1,
+      labelFontSize: "10px",
+      labelFontFamily: "Roboto",
+      labelColor: primitives.Colors.Black,
+      labelFontWeight: "normal",
+      labelFontStyle: "normal",
+
+      /* Callout */
+      calloutMaximumVisibility: primitives.Visibility.Dot,
+      showCallout: true,
+      calloutPlacementOffset: 100,
+      calloutfillColor: "#000000",
+      calloutBorderColor: null,
+      calloutOffset: 4,
+      calloutCornerRadius: 4,
+      calloutPointerWidth: "10%",
+      calloutLineWidth: 1,
+      calloutOpacity: 0.2,
+
+      /* Interactivity */
+      navigationMode: primitives.NavigationMode.Default,
+      highlightGravityRadius: 40,
+      enablePanning: true,
+      scale: 1.0,
+
+      /* Frame */
+      showFrame: false,
+      frameInnerPadding: 2,
+      frameOuterPadding: 2,
+      padding: new primitives.Thickness(10, 10, 10, 10)
+    },
+      /* On property change event handler */
+      function () {
+        control.setOptions(GetDiagramConfig());
+        control.update(primitives.UpdateMode.Refresh);
+      });
 
     document.addEventListener('DOMContentLoaded', function () {
-      var request = new XMLHttpRequest();
-      request.open('GET', 'package.json', true);
-      request.onload = function() {
-        if (this.status >= 200 && this.status < 400) {
-          var package = JSON.parse(this.response);
-          console.log();
-          document.getElementById("version").appendChild(document.createTextNode(package.version));
-        }
-      };
-      request.send();
-
-
-      // build samples hash
-      samplesHash = {};
-      for (var index = 0; index < files.length; index += 1) {
-        var optgroup = files[index];
-        for (var itemIndex = 0; itemIndex < optgroup.items.length; itemIndex += 1) {
-          var option = optgroup.items[itemIndex];
-          var key = index + "-" + itemIndex;
-          samplesHash[key] = option;
-          if(activeFile === undefined) {
-            activeFile = option;
-          }
-        }
-      }
-
-      updateFiles(activeFile);
-      preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
-      resizeWindow();
-      Update();
-
-      var filesElement = document.getElementById("files");
-      filesElement.addEventListener("change", function (event) {
-        var filesElement = document.getElementById("files");
-        activeFile = samplesHash[filesElement.options[filesElement.selectedIndex].getAttribute("data-key")];
-        preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
-        Update();
-      });
-      
-
-      var frameworksElement =  document.getElementById("frameworks");
-      frameworksElement.addEventListener("click", function(event) {
-        preferredFramework = event.target.getAttribute("id");
-        preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
-        Update();
-      });
-
-      var openUrlElement = document.getElementById("openURL");
-      openUrlElement.addEventListener("click", function(event) {
-        var frameworkUrl = activeFile.frameworks[preferredFramework];
-        window.location.href = frameworkUrl;
-      });
+      optionsRender.render(document.getElementById("westpanel"));
+      control = primitives.FamDiagram(document.getElementById("centerpanel"),
+        GetDiagramConfig()
+      );
 
       window.addEventListener('resize', function (event) {
-        resizeWindow();
+        onWindowResize();
       });
     });
 
-    function resizeWindow() {
-      var navigationBarElement = document.getElementById("navigationBar");
-      var frameworksBarElement = document.getElementById("frameworksBar");
-      var placeholderElement = document.getElementById("placeholder");
-      placeholderElement.style.top = (navigationBarElement.offsetHeight + frameworksBarElement.offsetHeight) + "px";
-    }
+    function GetDiagramConfig() {
+      var options = optionsRender.getValues();
 
-    function Update() {
-      var frameworkUrl = activeFile.frameworks[preferredFramework];
-      var contentElement = document.getElementById("content");
-      contentElement.setAttribute('src', frameworkUrl);
-    }
+      primitives.mergeObjects(options, {
+        templates: [getUnitTemplate(), getCalloutUnitTemplate(), getDotTemplate()],
+        defaultTemplateName: "UnitTemplate",
+        defaultCalloutTemplateName: "CalloutUnitTemplate",
+        onItemRender: onTemplateRender,
+        arrowsDirection: primitives.GroupByType.Parents
+      })
 
-    function updateFiles(activeFile) {
-      var activeFile;
-      var filesElement = document.getElementById("files");
-      filesElement.innerHTML = "";
-      for (var index = 0; index < files.length; index += 1) {
-        var optgroup = files[index];
-        var optgroupElement = document.createElement('OPTGROUP');
-        optgroupElement.setAttribute("label", optgroup.label);
+      primitives.mergeObjects(options, {
+        onCursorChanging: onCursorChanging,
+        onCursorChanged: onCursorChanged,
+        onHighlightChanging: onHighlightChanging,
+        onHighlightChanged: onHighlightChanged,
+        onSelectionChanged: onSelectionChanged
+      });
 
-        for (var itemIndex = 0; itemIndex < optgroup.items.length; itemIndex += 1) {
-          var option = optgroup.items[itemIndex];
-          var optionElement = document.createElement('OPTION');
-          var key = index + "-" + itemIndex;
-          optionElement.setAttribute("data-key", key);
-          optionElement.appendChild(document.createTextNode(option.label));
-          optgroupElement.appendChild(optionElement);
+      var annotations = [];
+      // Populate annotations to visualize family ordering references
+      for (var index = 0; index < famdata.length; index += 1) {
+        var item = famdata[index];
+        if (item.relativeItem != null) {
+          annotations.push({
+            annotationType: primitives.AnnotationType.Connector,
+            fromItem: item.id,
+            toItem: item.relativeItem,
+            label: null,
+            connectorShapeType: primitives.ConnectorShapeType.OneWay,
+            color: primitives.Colors.Gray,
+            offset: -5,
+            lineWidth: 3,
+            lineType: primitives.LineType.Dotted,
+            connectorPlacementType: primitives.ConnectorPlacementType.Straight,
+            selectItems: false
+          });
         }
-        filesElement.appendChild(optgroupElement);
+        if (item.primaryParent != null) {
+          annotations.push({
+            annotationType: primitives.AnnotationType.Connector,
+            fromItem: item.id,
+            toItem: item.primaryParent,
+            label: null,
+            connectorShapeType: primitives.ConnectorShapeType.OneWay,
+            color: primitives.Colors.Red,
+            offset: -5,
+            lineWidth: 3,
+            lineType: primitives.LineType.Dotted,
+            connectorPlacementType: primitives.ConnectorPlacementType.Offbeat,
+            selectItems: false
+          });
+        }
       }
+
+      if(options.addLevelAnnotations) {
+        for(index = 0; index < 20; index+=1) {
+          annotations.push({
+            annotationType: primitives.AnnotationType.Level,
+            levels: [index],
+            title: "Level " + index,
+            offset: new primitives.Thickness(0, -1, 0, -1),
+            opacity: (index % 2 > 0 ? 0.2 : 0)
+          })
+        }
+      }
+
+      primitives.mergeObjects(options, {
+        items: famdata,
+        cursorItem: 1,
+        annotations: annotations
+      }); // See dependencies.js
+
+      return options;
     }
 
-    function updateFrameworks(frameworks, preferredFramework) {
-      if(!frameworks.hasOwnProperty(preferredFramework)) {
-        for(var index=0; index < frameworksOrder.length; index+=1) {
-          var framework = frameworksOrder[index];
-          if(frameworks[framework] !== undefined) {
-            preferredFramework = framework;
+    function getDefaultTemplate(options) {
+      var result = new primitives.TemplateConfig();
+      result.name = "defaultTemplate";
+
+      // If we don't change anything in template then all its properties stays default
+      // So we change only minimized item properties
+      primitives.mergeObjects(result, options.DefaultTemplateOptions);
+
+      return result;
+    }
+
+    function getParentsList(data) {
+      var message = "",
+        index, len;
+
+      if (data.parentItems.length > 0) {
+        message += " Parent item <b>";
+        for (index = 0, len = data.parentItems.length; index < len; index += 1) {
+          if (index > 0) {
+            message += ", ";
           }
+          message += "'" + data.parentItems[index].title + "'";
+        }
+        message += "</b>";
+      }
+
+      return message;
+    };
+
+    function onSelectionChanged(e, data) {
+      var selectedItems = control.getOption("selectedItems");
+      var message = "";
+      for (var index = 0; index < selectedItems.length; index += 1) {
+        var itemConfig = selectedItems[index];
+        if (message != "") {
+          message += ", ";
+        }
+        message += "<b>'" + itemConfig.title + "'</b>";
+      }
+      message += getParentsList(data);
+      document.getElementById("southpanel").innerHTML = "User selected following items: " + message;
+    }
+
+    function onHighlightChanging(e, data) {
+      var message = (data.context != null) ? "User is hovering mouse over item <b>'" + data.context.title + "'</b>." : "";
+      message += getParentsList(data);
+      document.getElementById("southpanel").innerHTML = message;
+    }
+
+    function onHighlightChanged(e, data) {
+      var message = (data.context != null) ? "User hovers mouse over item <b>'" + data.context.title + "'</b>." : "";
+      message += getParentsList(data);
+      document.getElementById("southpanel").innerHTML = message;
+    }
+
+    function onCursorChanging(e, data) {
+      var message = "User is clicking on item '" + data.context.title + "'.";
+      message += getParentsList(data);
+      updateHighlightPathAnnotations(data);
+      document.getElementById("southpanel").innerHTML = message;
+    }
+
+    function onCursorChanged(e, data) {
+      var message = "User clicked on item '" + data.context.title + "'.";
+      message += getParentsList(data);
+      document.getElementById("southpanel").innerHTML = message;
+    }
+
+    function updateHighlightPathAnnotations(data) {
+      var annotations = control.getOption("annotations");
+
+      var newAnnotations = [];
+      for (var index = 0, len = annotations.length; index < len; index += 1) {
+        var annotation = annotations[index];
+        if (annotation.annotationType != primitives.AnnotationType.HighlightPath) {
+          newAnnotations.push(annotation);
         }
       }
-      
-      var frameworksElement =  document.getElementById("frameworks");
-      frameworksElement.innerHTML = "";
-      for (var index = 0; index < frameworksOrder.length; index += 1) {
-        var framework = frameworksOrder[index];
-        var frameworkElement =  document.createElement('li');
-        frameworkElement.setAttribute('class', "nav-item");
-        frameworkElement.setAttribute('id', framework);
-        frameworkElement.setAttribute('value', framework);
-        var hrefElement = document.createElement('a');
-        hrefElement.setAttribute('class', "nav-link" + (framework === preferredFramework ? " active" : "") + (frameworks[framework] === undefined ? " disabled" : ""));
-        hrefElement.setAttribute('id', framework);
-        hrefElement.setAttribute('value', framework);
-        hrefElement.setAttribute('href', "#");
-        hrefElement.appendChild(document.createTextNode(frameworksLabels[framework]))
-        frameworkElement.appendChild(hrefElement);
-        frameworksElement.appendChild(frameworkElement);
+
+      var items = [];
+      items = items.concat(data.parentItems);
+      items = items.concat(data.childrenItems);
+      for (index = 0, len = items.length; index < len; index += 1) {
+        var parent = items[index];
+        var highlightid = data.context.id;
+        var annotation = new primitives.HighlightPathAnnotationConfig({
+          items: [highlightid, parent.id],
+          color: primitives.Colors.Navy,
+          opacity: 0.4,
+          lineWidth: 6,
+          zOrderType: primitives.ZOrderType.Background,
+          showArrows: false
+        });
+        newAnnotations.push(annotation);
       }
-      return preferredFramework;
+      control.setOptions({ annotations: newAnnotations });
+    }
+
+    function onWindowResize() {
+      if (timer == null) {
+        timer = window.setTimeout(function () {
+          control.update(primitives.UpdateMode.Refresh);
+          window.clearTimeout(timer);
+          timer = null;
+        }, 300);
+      }
+    }
+
+    function onTemplateRender(event, data) {
+      var itemConfig = data.context,
+        element = data.element;
+
+      if (data.templateName == "dot") {
+        var titleBackground = element;
+        titleBackground.style.backgroundColor = itemConfig.itemTitleColor || primitives.Colors.RoyalBlue;
+      }
+
+      if (data.templateName == "UnitTemplate") {
+        var titleBackground = element.firstChild;
+        titleBackground.style.backgroundColor = itemConfig.itemTitleColor || primitives.Colors.RoyalBlue;
+
+        var title = titleBackground.firstChild;
+        title.textContent = itemConfig.title;
+      }
+
+      if (data.templateName == "CalloutUnitTemplate") {
+        var titleBackground = element.firstChild;
+        titleBackground.style.backgroundColor = itemConfig.itemTitleColor || primitives.Colors.RoyalBlue;
+
+        var title = element.childNodes[1];
+        title.textContent = itemConfig.title;
+
+        var description = element.childNodes[2];
+        description.textContent = itemConfig.description;
+      }
+    }
+
+    function getDotTemplate() {
+      var result = new primitives.TemplateConfig();
+      result.name = "dot";
+
+      result.isActive = true;
+      result.itemSize = new primitives.Size(12, 12);
+      result.minimizedItemSize = new primitives.Size(8, 8);
+      result.minimizedItemCornerRadius = 4;
+      result.minimizedItemLineWidth = 1;
+      result.minimizedItemLineType = primitives.LineType.Solid;
+      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color
+      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color
+      result.minimizedItemOpacity = 0.7; // Shape background opacity
+
+      result.itemTemplate = ["div", {
+        "style": {
+          top: "2px",
+          left: "2px",
+          width: result.itemSize.width + "px",
+          height: result.itemSize.height + "px"
+        },
+        "class": ["bp-corner-all"]
+      }];
+
+      return result;
+    }
+
+    function getUnitTemplate() {
+      var result = new primitives.TemplateConfig();
+      result.name = "UnitTemplate";
+
+      result.itemSize = new primitives.Size(350, 60);
+      result.minimizedItemSize = new primitives.Size(8, 8);
+      result.minimizedItemCornerRadius = 4;
+      result.minimizedItemLineWidth = 1;
+      result.minimizedItemLineType = primitives.LineType.Solid;
+      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color
+      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color
+      result.minimizedItemOpacity = 0.7; // Shape background opacity
+
+      result.itemTemplate = ["div",
+        {
+          "style": {
+            width: result.itemSize.width + "px",
+            height: result.itemSize.height + "px"
+          },
+          "class": ["bp-item", "bp-corner-all", "bt-item-frame"]
+        },
+        ["div",
+          {
+            "name": "titleBackground",
+            "class": ["bp-item", "bp-corner-all", "bp-title-frame"],
+            "style": {
+              top: "2px",
+              left: "2px",
+              width: "350px",
+              height: "100%"
+            }
+          },
+          ["div",
+            {
+              "name": "title",
+              "class": "bp-item",
+              "style": {
+                top: "2px",
+                left: "2px",
+                width: "350px",
+                height: "20px",
+                fontSize: "16px",
+                Font: "Roboto",
+                color: "#222"
+              }
+            }
+          ]
+        ]
+      ];
+
+      return result;
+    }
+
+    function getCalloutUnitTemplate() {
+      var result = new primitives.TemplateConfig();
+      result.name = "CalloutUnitTemplate";
+
+      result.itemSize = new primitives.Size(320, 60);
+      result.minimizedItemSize = new primitives.Size(8, 8);
+      result.minimizedItemCornerRadius = 4;
+      result.minimizedItemLineWidth = 1;
+      result.minimizedItemLineType = primitives.LineType.Solid;
+      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color
+      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color
+      result.minimizedItemOpacity = 0.7; // Shape background opacity
+
+      result.itemTemplate = ["div",
+        {
+          "style": {
+            top: "2px",
+            left: "2px",
+            width: result.itemSize.width + "px",
+            height: result.itemSize.height + "px"
+          },
+          "class": ["bp-item", "bp-corner-all", "bt-item-frame"]
+        },
+        ["div",
+          {
+            "name": "titleBackground",
+            "style": {
+              top: "2px",
+              left: "2px",
+              width: "316px",
+              height: "4px"
+            },
+            "class": ["bp-item", "bp-corner-all", "bp-title-frame"]
+          }
+        ],
+        ["div",
+          {
+            name: "title",
+            "class": "bp-item",
+            "style": {
+              top: "8px",
+              left: "2px",
+              width: "312px",
+              height: "24px",
+              fontSize: "12px",
+              FontFace: "Roboto"
+            }
+          }
+        ],
+        ["div",
+          {
+            name: "description",
+            "class": "bp-item",
+            "style": {
+              top: "36px",
+              left: "4px",
+              width: "312px",
+              height: "36px",
+              fontSize: "10px"
+            }
+          }
+        ]
+      ];
+
+      return result;
     }
   </script>
+
 </head>
 
-<body style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
-  <nav id="navigationBar" class="navbar navbar-expand-sm navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="https://www.basicprimitives.com">BASIC PRIMITIVES</a>&nbsp;v<label id="version"></label>
-      <ul class="navbar-nav me-auto">
-        <select class="form-select form-select-sm ms-2" id="files">
-          <option selected>Choose sample...</option>
-        </select>
-        <li class="nav-item">
-          <a id="openURL" class="nav-link" href="#">
-            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-folder-symlink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z"/>
-              <path fill-rule="evenodd" d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z"/>
-              <path d="M8.616 10.24l3.182-1.969a.443.443 0 0 0 0-.742l-3.182-1.97c-.27-.166-.616.036-.616.372V6.7c-.857 0-3.429 0-4 4.8 1.429-2.7 4-2.4 4-2.4v.769c0 .336.346.538.616.371z"/>
-            </svg>
-          </a>
-        </li>
-      </ul>
+<body style="font-family: 'Roboto', sans-serif" !important>
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-4 col-lg-2 d-md-block bg-light sidebar collapse" style="position: fixed; top: 0; bottom: 0px; overflow-y: auto; float: none;">
+        <div class="position-sticky pt-3">
+          <div id="westpanel" class="flex-column"></div>
+        </div>
+      </nav>
+
+      <main class="col-md-8 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Comstock 3 Tech Tree Chart</h1>
+        </div>
+  <div id="centerpanel" class="mediaPlaceholder my-2 w-100"></div>
+        <div id="southpanel" class="alert alert-primary" style="min-height: 60px;" role="alert">
+        </div>
+      </main>
     </div>
-  </nav>
-  <nav id="frameworksBar" class="navbar navbar-expand-sm navbar-light bg-light">
-    <div class="container-fluid">
-      <ul id="frameworks" class="nav nav-tabs">
-      </ul>
-    </div>
-  </nav>
-  <div id="placeholder" style="position: absolute; top: 200px; left: 0px; right: 0px; bottom: 0px;">
-    <iframe id="content" style="position:absolute; border-style: dotted; border-width: 1px;" width="100%" height="100%" src=""></iframe>
   </div>
 </body>
 

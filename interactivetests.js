@@ -1147,7 +1147,7 @@ function OrgPdfkitTaskManagerFactory(getOptions, getGraphics, setLayout, templat
   tasks.addTask('ApplyLayoutChangesTask', ['graphics', 'setLayout', 'ItemsSizesOptionTask', 'CurrentControlSizeTask', 'ScaleOptionTask', 'AlignDiagramTask', 'FrameSizeTask', 'LevelTitleSizeTask'], _tasks_layout_ApplyLayoutChangesTask__WEBPACK_IMPORTED_MODULE_50__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green);
   tasks.addTask('ViewPortPlacementTask', ['ScaleOptionTask', 'CenterOnCursorTask', 'CreateTransformTask', 'ApplyLayoutChangesTask'], _tasks_layout_ViewPortPlacementTask__WEBPACK_IMPORTED_MODULE_56__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green);
   tasks.addTask('VerticalOffsetTask', ['ViewPortPlacementTask'], _tasks_layout_VerticalOffsetTask__WEBPACK_IMPORTED_MODULE_57__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green);
-  tasks.addTask('LogicalLevelsPlacementTask', ['OrgTreeTask', 'AlignDiagramTask'], _tasks_layout_OrgLogicalLevelsPlacementTask__WEBPACK_IMPORTED_MODULE_58__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green);
+  tasks.addTask('LogicalLevelsPlacementTask', ['OrgTreeTask', 'VisualTreeTask', 'AlignDiagramTask'], _tasks_layout_OrgLogicalLevelsPlacementTask__WEBPACK_IMPORTED_MODULE_58__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green);
   tasks.addTask('MergeLevelIntervalsTask', ['LevelAnnotationOptionTask', 'LogicalLevelsPlacementTask'], _tasks_layout_MergeLevelIntervalsTask__WEBPACK_IMPORTED_MODULE_59__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green); // Renders
 
   tasks.addTask('DrawBackgroundAnnotationTask', ['graphics', 'CreateTransformTask', 'ApplyLayoutChangesTask', 'BackgroundAnnotationOptionTask', 'VisualTreeTask', 'AlignDiagramTask'], _tasks_renders_DrawBackgroundAnnotationTask__WEBPACK_IMPORTED_MODULE_60__["default"], _enums__WEBPACK_IMPORTED_MODULE_8__["Colors"].Green);
@@ -1461,7 +1461,7 @@ function TaskManagerFactory(getOptions, getGraphics, getLayout, setLayout, templ
   tasks.addTask('ProjectItemsToFrameTask', ['CreateTransformTask', 'FrameSizeTask', 'ApplyLayoutChangesTask', 'ScaleOptionTask', 'AlignDiagramTask', 'CenterOnCursorTask', 'ItemTemplateParamsTask', 'SelectedItemsTask'], _tasks_layout_ProjectItemsToFrameTask__WEBPACK_IMPORTED_MODULE_71__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green);
   tasks.addTask('ViewPortPlacementTask', ['ScaleOptionTask', 'CenterOnCursorTask', 'CreateTransformTask', 'ApplyLayoutChangesTask'], _tasks_layout_ViewPortPlacementTask__WEBPACK_IMPORTED_MODULE_72__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green);
   tasks.addTask('VerticalOffsetTask', ['ViewPortPlacementTask'], _tasks_layout_VerticalOffsetTask__WEBPACK_IMPORTED_MODULE_73__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green);
-  tasks.addTask('LogicalLevelsPlacementTask', ['OrgTreeTask', 'AlignDiagramTask'], _tasks_layout_OrgLogicalLevelsPlacementTask__WEBPACK_IMPORTED_MODULE_74__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green);
+  tasks.addTask('LogicalLevelsPlacementTask', ['OrgTreeTask', 'VisualTreeTask', 'AlignDiagramTask'], _tasks_layout_OrgLogicalLevelsPlacementTask__WEBPACK_IMPORTED_MODULE_74__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green);
   tasks.addTask('MergeLevelIntervalsTask', ['LevelAnnotationOptionTask', 'LogicalLevelsPlacementTask'], _tasks_layout_MergeLevelIntervalsTask__WEBPACK_IMPORTED_MODULE_75__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green); // Renders
 
   tasks.addTask('DrawBackgroundAnnotationTask', ['graphics', 'CreateTransformTask', 'ApplyLayoutChangesTask', 'BackgroundAnnotationOptionTask', 'VisualTreeTask', 'AlignDiagramTask'], _tasks_renders_DrawBackgroundAnnotationTask__WEBPACK_IMPORTED_MODULE_76__["default"], _enums__WEBPACK_IMPORTED_MODULE_1__["Colors"].Green);
@@ -24557,10 +24557,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../enums */ "./src/enums.js");
 /* harmony import */ var _algorithms_getMergedIntervals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../algorithms/getMergedIntervals */ "./src/algorithms/getMergedIntervals.js");
 /* harmony import */ var _graphics_structs_Interval__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../graphics/structs/Interval */ "./src/graphics/structs/Interval.js");
+/* harmony import */ var _transformations_visualTreeBuilder_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../transformations/visualTreeBuilder/enums */ "./src/tasks/transformations/visualTreeBuilder/enums.js");
 
 
 
-function OrgLogicalLevelsPlacementTask(orgTreeTask, alignDiagramTask) {
+
+function OrgLogicalLevelsPlacementTask(orgTreeTask, visualTreeTask, alignDiagramTask) {
   var _data = {
     positions: []
   };
@@ -24574,6 +24576,7 @@ function OrgLogicalLevelsPlacementTask(orgTreeTask, alignDiagramTask) {
     var intervals = [],
         orgTree = orgTreeTask.getOrgTree(),
         itemsPositions = alignDiagramTask.getItemsPositions(),
+        branchAligner = visualTreeTask.getBranchAligner(),
         visited = {};
     orgTree.loopLevels(this, function (nodeId, node, levelIndex) {
       if (node.itemType == _enums__WEBPACK_IMPORTED_MODULE_0__["ItemType"].Regular) {
@@ -24581,7 +24584,13 @@ function OrgLogicalLevelsPlacementTask(orgTreeTask, alignDiagramTask) {
           var itemPosition = itemsPositions[nodeId];
 
           if (itemPosition) {
-            var interval = new _graphics_structs_Interval__WEBPACK_IMPORTED_MODULE_2__["default"](itemPosition.topConnectorShift, itemPosition.bottomConnectorShift - 1, levelIndex + node.levelOffset);
+            var levelOffset = node.levelOffset;
+
+            if (levelOffset === null) {
+              levelOffset = branchAligner.getGroupSize(node.parent, _transformations_visualTreeBuilder_enums__WEBPACK_IMPORTED_MODULE_3__["GroupType"].RowChildren);
+            }
+
+            var interval = new _graphics_structs_Interval__WEBPACK_IMPORTED_MODULE_2__["default"](itemPosition.topConnectorShift, itemPosition.bottomConnectorShift - 1, levelIndex + levelOffset);
             var key = interval.toString();
 
             if (!visited[key]) {
@@ -26127,7 +26136,7 @@ function OrgItemsOptionTask(optionsTask, defaultItemConfig) {
       placeAssistantsAboveChildren: new _readers_EnumerationReader__WEBPACK_IMPORTED_MODULE_3__["default"](_enums__WEBPACK_IMPORTED_MODULE_4__["Enabled"], false, defaultItemConfig.placeAssistantsAboveChildren),
       isVisible: new _readers_ValueReader__WEBPACK_IMPORTED_MODULE_0__["default"](["boolean"], false, defaultItemConfig.isVisible),
       isActive: new _readers_ValueReader__WEBPACK_IMPORTED_MODULE_0__["default"](["boolean"], false, defaultItemConfig.isActive),
-      levelOffset: new _readers_ValueReader__WEBPACK_IMPORTED_MODULE_0__["default"](["number"], true)
+      levelOffset: new _readers_ValueReader__WEBPACK_IMPORTED_MODULE_0__["default"](["number"], false, null)
     }), true, "id", true, true)
   });
 
@@ -32129,7 +32138,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return VisualTreeTask; });
 /* harmony import */ var _algorithms_Family__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../algorithms/Family */ "./src/algorithms/Family.js");
 /* harmony import */ var _algorithms_Tree__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../algorithms/Tree */ "./src/algorithms/Tree.js");
-/* harmony import */ var _visualTreeBuilder_VisualTreeBuilder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./visualTreeBuilder/VisualTreeBuilder */ "./src/tasks/transformations/visualTreeBuilder/VisualTreeBuilder.js");
+/* harmony import */ var _visualTreeBuilder_BranchAligner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./visualTreeBuilder/BranchAligner */ "./src/tasks/transformations/visualTreeBuilder/BranchAligner.js");
+/* harmony import */ var _visualTreeBuilder_VisualTreeBuilder__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./visualTreeBuilder/VisualTreeBuilder */ "./src/tasks/transformations/visualTreeBuilder/VisualTreeBuilder.js");
+
 
 
 
@@ -32143,7 +32154,8 @@ function VisualTreeTask(orgTreeTask, activeItemsTask, visualTreeOptionTask) {
 
   /* Family structure where key: TreeItem.id and value: TreeItem */
   _treeItemCounter,
-      _visualTreeBuilder = Object(_visualTreeBuilder_VisualTreeBuilder__WEBPACK_IMPORTED_MODULE_2__["default"])();
+      _branchAligner,
+      _visualTreeBuilder = Object(_visualTreeBuilder_VisualTreeBuilder__WEBPACK_IMPORTED_MODULE_3__["default"])();
 
   function process() {
     var orgTree = orgTreeTask.getOrgTree();
@@ -32157,9 +32169,11 @@ function VisualTreeTask(orgTreeTask, activeItemsTask, visualTreeOptionTask) {
       _visualTree = _visualTreeBuilder$bu.visualTree;
       _navigationFamily = _visualTreeBuilder$bu.navigationFamily;
       _treeItemCounter = _visualTreeBuilder$bu.treeItemCounter;
+      _branchAligner = _visualTreeBuilder$bu.branchAligner;
     } else {
       _visualTree = Object(_algorithms_Tree__WEBPACK_IMPORTED_MODULE_1__["default"])();
       _navigationFamily = Object(_algorithms_Family__WEBPACK_IMPORTED_MODULE_0__["default"])();
+      _branchAligner = Object(_visualTreeBuilder_BranchAligner__WEBPACK_IMPORTED_MODULE_2__["default"])();
     }
 
     var _getVisualTreeMargins = getVisualTreeMargins(_visualTree);
@@ -32219,6 +32233,10 @@ function VisualTreeTask(orgTreeTask, activeItemsTask, visualTreeOptionTask) {
     return _navigationFamily;
   }
 
+  function getBranchAligner() {
+    return _branchAligner;
+  }
+
   function getLeftMargins() {
     return _leftMargins;
   }
@@ -32237,7 +32255,8 @@ function VisualTreeTask(orgTreeTask, activeItemsTask, visualTreeOptionTask) {
     getLogicalFamily: getLogicalFamily,
     getLeftMargins: getLeftMargins,
     getRightMargins: getRightMargins,
-    getMaximumId: getMaximumId
+    getMaximumId: getMaximumId,
+    getBranchAligner: getBranchAligner
   };
 }
 ;
@@ -36319,12 +36338,12 @@ function RowKeyGenerator() {
 
 function Row(id) {
   this.id = id;
+  this.rowType = _enums__WEBPACK_IMPORTED_MODULE_1__["RowType"].Items;
   this.index = 0;
   this.offset = 0;
   this.extend = true;
   /* indicates that we need to keep branches of this row children above subsequent rows */
 
-  this.nodes = [];
   this.depth = 0;
   this.groups = [];
   this.groups[_enums__WEBPACK_IMPORTED_MODULE_1__["GroupType"].Items] = [[1, 1]];
@@ -36446,7 +36465,6 @@ function BranchAligner() {
       _rowsTree.add(parentRowId, rowId, row);
     }
 
-    ;
     nodes.forEach(function (child) {
       _rowHash[child.id] = rowId;
     });
@@ -36456,11 +36474,9 @@ function BranchAligner() {
 
   function align(debug) {
     _rowsTree.loopPostOrder(this, function (rowId, row, parentRowId, parentRow) {
-      // console.log(rowId + "  " + Object.entries(RowType).filter(([name, value]) => value == row.rowType)[0][0]  + " parent=" + parentRowId + " extend=" + row.extend);
       row.depth = row.getDepth() + row.offset;
 
       if (parentRow != null) {
-        //console.log(rowId + "  depth = " + row.depth);
         parentRow.addRowDepth(row.rowType, row.extend, row.index, row.depth);
       }
     });
@@ -36490,6 +36506,20 @@ function BranchAligner() {
 
     var childRow = (row.groups[groupType] || [])[index];
     return childRow && childRow[0] || 1;
+  }
+
+  function getGroupSize(nodeId, groupType) {
+    var rowId = _rowHash[nodeId];
+
+    var row = _rowsTree.node(rowId);
+
+    if (row) {
+      if (row.groups.hasOwnProperty(groupType)) {
+        return row.groups[groupType].length;
+      }
+    }
+
+    return 0;
   }
 
   function getRowsDepth(nodeId, groupType) {
@@ -36532,7 +36562,8 @@ function BranchAligner() {
     loopGroupTypes: loopGroupTypes,
     getRowDepth: getRowDepth,
     getRowsDepth: getRowsDepth,
-    loopRows: loopRows
+    loopRows: loopRows,
+    getGroupSize: getGroupSize
   };
 }
 
@@ -36789,11 +36820,13 @@ function VisualTreeBuilder() {
 
     var _createVisualTreeItem = createVisualTreeItems(orgTree, options, activeItems),
         visualTree = _createVisualTreeItem.visualTree,
-        navigationFamily = _createVisualTreeItem.navigationFamily;
+        navigationFamily = _createVisualTreeItem.navigationFamily,
+        branchAligner = _createVisualTreeItem.branchAligner;
 
     return {
       visualTree: visualTree,
       navigationFamily: navigationFamily.getFamily(),
+      branchAligner: branchAligner,
       treeItemCounter: _treeItemCounter
     };
   }
@@ -37247,7 +37280,8 @@ function VisualTreeBuilder() {
     });
     return {
       visualTree: visualTree,
-      navigationFamily: navigationFamily
+      navigationFamily: navigationFamily,
+      branchAligner: branchAligner
     };
   }
 
