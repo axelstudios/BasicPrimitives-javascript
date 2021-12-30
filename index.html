@@ -17,6 +17,12 @@
         label: "Organizational Chart",
         items: [
           {
+            label: "Comstock 3 Tech Tree Chart",
+            frameworks: {
+              javascript: "samples/javascript.controls/ComStock3_DemoTechTree.html"
+            }
+          },
+          {
             label: "Large Hierarchy",
             frameworks: {
               javascript: "samples/javascript.controls/DemoLargeHierarchy.html",
@@ -640,7 +646,7 @@
         preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
         Update();
       });
-      
+
 
       var frameworksElement =  document.getElementById("frameworks");
       frameworksElement.addEventListener("click", function(event) {
@@ -703,7 +709,7 @@
           }
         }
       }
-      
+
       var frameworksElement =  document.getElementById("frameworks");
       frameworksElement.innerHTML = "";
       for (var index = 0; index < frameworksOrder.length; index += 1) {
