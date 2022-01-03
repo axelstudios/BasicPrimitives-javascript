@@ -25,7 +25,7 @@
 				{ id: 8, parents: [7], title: "Leon Kemp", label: "Leon Kemp", description: "", image: "../images/photos/l.png" }
 			];
 
-			options.pageFitMode = primitives.PageFitMode.None;
+			options.pageFitMode = primitives.PageFitMode.FitToPage;
 			options.items = items;
 			options.cursorItem = 2;
 			options.linesWidth = 1;
@@ -39,6 +39,18 @@
 			options.lineItemsInterval = 10;
 			options.arrowsDirection = primitives.GroupByType.Parents;
 			options.showExtraArrows = false;
+
+			neighboursSelectionMode: primitives.NeighboursSelectionMode.ParentsChildren;
+      groupByType: primitives.GroupByType.Parents;
+      alignBylevels: true;
+      hideGrandParentsConnectors: true;
+      enableMatrixLayout: true;
+      minimumMatrixSize: 15;
+      maximumColumnsInMatrix: 8;
+
+	  
+			
+			
 
 			control = primitives.FamDiagram(document.getElementById("basicdiagram"), options);
 		});

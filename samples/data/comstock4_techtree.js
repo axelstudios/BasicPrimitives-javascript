@@ -1,14 +1,14 @@
 var famdata = [
 
-  { id: 0, parents: [], title: "simulation_year", itemTitleColor: "#ddd", groupTitle: "tsv"},
-  { id: 3, parents: [], title: "climate_zone", itemTitleColor: "#ddd", groupTitle: "tsv" },
-  { id: 1, parents: [], title: "rotation", itemTitleColor: "#ddd", groupTitle: "tsv"},
+  { id: 0, parents: [], title: "simulation_year", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
+  { id: 3, parents: [], title: "climate_zone", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here" },
+  { id: 1, parents: [], title: "rotation", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
 
 
-  { id: 4, parents: [3], title: "county_id", itemTitleColor: "#ddd", groupTitle: "tsv"},
+  { id: 4, parents: [3], title: "county_id", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
 
-  { id: 5, parents: [4], title: "building_type", itemTitleColor: "#ddd", groupTitle: "tsv"},
-  { id: 6, parents: [4], title: "state_id", itemTitleColor: "#ddd", groupTitle: "tsv"},
+  { id: 5, parents: [4], title: "building_type", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
+  { id: 6, parents: [4], title: "state_id", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
 
   { id: 7, parents: [5], title: "hvac_tst_htg_delta_f", itemTitleColor: "#ddd", groupTitle: "tsv"},
   { id: 8, parents: [5], title: "hvac_tst_clg_delta_f", itemTitleColor: "#ddd", groupTitle: "tsv", },

@@ -193,7 +193,8 @@
         templates: [getDefaultTemplate(options), getLabelAnnotationTemplate()],
         defaultTemplateName: "defaultTemplate",
         defaultLabelAnnotationTemplate: "LabelAnnotationTemplate",
-        onItemRender: onTemplateRender
+        onItemRender: onTemplateRender,
+        arrowsDirection: primitives.GroupByType.Children
       })
 
       primitives.mergeObjects(options, {
