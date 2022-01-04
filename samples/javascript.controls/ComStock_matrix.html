@@ -4,7 +4,7 @@
 <head>
   <title>ComStock Workflow with Dynamic Loading</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!--   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript" src="../../primitives.js"></script>
   <script type="text/javascript" src="../../javascriptsamples.js"></script>
   <script type="text/javascript" src="../data/comstock4_techtree.js"></script>
@@ -12,9 +12,9 @@
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-<link href="../../css/primitives.css" media="screen" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="../../css/primitives.css" media="screen" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
     var control = null;
@@ -112,7 +112,7 @@
       lineItemsInterval: 20,
       cousinsIntervalMultiplier: 0,
 
-       /* Connectors */
+      /* Connectors */
       arrowsDirection: primitives.GroupByType.Children,
       showExtraArrows: true,
       extraArrowsMinimumSpace: 30,
@@ -153,7 +153,7 @@
       highlightGravityRadius: 40,
       enablePanning: true,
       scale: 1.0,
-      
+
       /* Frame */
       showFrame: false,
       frameInnerPadding: 2,
@@ -280,7 +280,7 @@
       }
 
       return message;
-    };
+    }
 
     function onSelectionChanged(e, data) {
       var selectedItems = control.getOption("selectedItems");
@@ -400,8 +400,8 @@
       result.minimizedItemCornerRadius = 4;
       result.minimizedItemLineWidth = 1;
       result.minimizedItemLineType = primitives.LineType.Solid;
-      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color 
-      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color 
+      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color
+      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color
       result.minimizedItemOpacity = 0.7; // Shape background opacity
 
       result.itemTemplate = ["div", {
@@ -426,8 +426,8 @@
       result.minimizedItemCornerRadius = 4;
       result.minimizedItemLineWidth = 1;
       result.minimizedItemLineType = primitives.LineType.Solid;
-      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color 
-      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color 
+      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color
+      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color
       result.minimizedItemOpacity = 0.7; // Shape background opacity
 
       result.itemTemplate = ["div",
@@ -479,8 +479,8 @@
       result.minimizedItemCornerRadius = 4;
       result.minimizedItemLineWidth = 1;
       result.minimizedItemLineType = primitives.LineType.Solid;
-      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color 
-      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color 
+      result.minimizedItemBorderColor = null; // Shape border line has the same color as item title background color
+      result.minimizedItemFillColor = null; // Shape background has the same color as item title background color
       result.minimizedItemOpacity = 0.7; // Shape background opacity
 
       result.itemTemplate = ["div",
@@ -548,12 +548,12 @@
           <div id="westpanel" class="flex-column"></div>
         </div>
       </nav>
-  
-      <main class="col-md-8 ms-sm-auto col-lg-10 px-md-4">
+
+      <main class="ms-sm-auto px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">Matrix and Grouped by Parents</h1>
         </div>
-  <div id="centerpanel" class="mediaPlaceholder my-2 w-100"></div>
+        <div id="centerpanel" class="mediaPlaceholder my-2 w-100"></div>
         <div id="southpanel" class="alert alert-primary" style="min-height: 60px;" role="alert">
         </div>
       </main>
