@@ -1,3 +1,15 @@
+font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Roboto-Regular.woff2') format('woff2'),
+        url('../fonts/Roboto-Regular.woff') format('woff'),
+        url('../fonts/Roboto-Regular.ttf') format('truetype'),
+        url('../fonts/Roboto-Regular.svg#Roboto-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .orgdiagram {
 	outline: none;
 }
@@ -15,7 +27,7 @@
 .bp-item {
 	position: absolute;
 	overflow: hidden;
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-family: 'Roboto';
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-user-select: none;
 	-webkit-touch-callout: none;
@@ -35,7 +47,7 @@
 
 .bt-item-frame {
 	border: 1px solid #dddddd;
-	background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
+	background: #eeeeee;
 	color: #333333;
 }
 
@@ -58,7 +70,7 @@
 
 .bp-photo-frame {
 	border: 1px solid #cccccc;
-	background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x;
+	background: #f6f6f6;
 	color: #1c94c4;
 }
 
@@ -69,13 +81,13 @@
 
 .bp-cursor-frame {
 	border: 2px solid #fbd850;
-	background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x;
+	background: #ffffff;
 	color: #eb8f00;
 }
 
 .bp-highlight-frame {
 	border: 1px solid #fbcb09;
-	background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x;
+	background: #fdf5ce;
 	color: #c77405;
 }
 
