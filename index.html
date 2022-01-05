@@ -16,17 +16,19 @@
       {
         label: "MyFiles",
         items: [
-      
+
           {
             label: "ComStock Workflow no Matrix",
             frameworks: {
-              javascript: "samples/javascript.controls/ComStock_no_matrix.html"
+              javascript: "samples/javascript.controls/ComStock_no_matrix.html",
+              pdfkit: "samples/pdfkit.plugins/ComStock_no_matrix.html"
             }
           },
           {
             label: "ComStock Workflow Matrix",
             frameworks: {
-              javascript: "samples/javascript.controls/ComStock_matrix.html"
+              javascript: "samples/javascript.controls/ComStock_matrix.html",
+              pdfkit: "samples/pdfkit.plugins/ComStock_matrix.html"
             }
           },
           ]
@@ -72,7 +74,7 @@
         preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
         Update();
       });
-      
+
 
       var frameworksElement =  document.getElementById("frameworks");
       frameworksElement.addEventListener("click", function(event) {
@@ -135,7 +137,7 @@
           }
         }
       }
-      
+
       var frameworksElement =  document.getElementById("frameworks");
       frameworksElement.innerHTML = "";
       for (var index = 0; index < frameworksOrder.length; index += 1) {
