@@ -1,6 +1,6 @@
 var famdata = [
 
-  { id: 0, parents: [], title: "simulation_year", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
+  { id: 0, parents: [], title: "simulation_year", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here."},
   { id: 3, parents: [], title: "climate_zone", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here" },
   { id: 1, parents: [], title: "rotation", itemTitleColor: "#ddd", groupTitle: "tsv", description: "Description of item here"},
 
@@ -185,7 +185,7 @@ var famdata = [
 
  { id: 61, parents: [12], title: "year_built", itemTitleColor: "#a7e3f4",  groupTitle: "buildstock.csv"}, 
 
- { id: 62, parents: [0], title: "year_of_simulation", itemTitleColor: "#a7e3f4",  groupTitle: "buildstock.csv"},
+ { id: 62, parents: [0], title: "year_of_simulation", itemTitleColor: "#a7e3f4",  groupTitle: "buildstock.csv", description: ""},
  
 
 
