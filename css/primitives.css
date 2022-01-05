@@ -53,7 +53,7 @@ font-face {
 }
 
 .bp-title {
-	text-overflow: visible
+	text-overflow: visible;
 	-o-text-overflow: visible;
 	overflow-wrap: break-word;
 	white-space: wrap;
