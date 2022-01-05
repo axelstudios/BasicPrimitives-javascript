@@ -26,7 +26,8 @@ font-face {
 }
 .bp-item {
 	position: absolute;
-	overflow: hidden;
+	overflow: visible;
+	overflow-wrap: break-word;
 	font-family: 'Roboto';
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-user-select: none;
@@ -52,12 +53,13 @@ font-face {
 }
 
 .bp-title {
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
+	text-overflow: visible;
+	-o-text-overflow: visible;
+	overflow-wrap: break-word;
+	white-space: wrap;
 	font-size: 14px;
 	line-height: 16px;
-	color: white;
+	color: black;
 	padding: 0;
 }
 
@@ -100,7 +102,7 @@ font-face {
 .bp-grouptitle-frame {
 	background: #0000ff;
 	border-width: 0;
-	color: white;
+	color: #000000;
 	padding: 0;
 }
 
