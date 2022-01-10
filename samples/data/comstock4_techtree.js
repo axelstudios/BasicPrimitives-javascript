@@ -1,6 +1,6 @@
 var famdata = [
 
-  { id: 0, parents: [], title: "simulation_year", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here."},
+  { id: 0, parents: [], title: "year_of_simulation", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here."},
   { id: 3, parents: [], title: "climate_zone", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here" },
   { id: 1, parents: [], title: "rotation", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here"},
 
@@ -93,7 +93,7 @@ var famdata = [
  { id: 208, parents: [197,163], title: "energy_code_followed_during_last_walls_replacement", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitle: "tsv",groupTitleColor: "#ddd"},
  { id: 209, parents: [198,164], title: "energy_code_followed_during_last_windows_replacement", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitle: "tsv",groupTitleColor: "#ddd"},
 
- { id: 201, parents: [174,5,13], title: "window_wall_ratio", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitle: "tsv",groupTitleColor: "#ddd"},
+ { id: 201, parents: [190,5,13], title: "window_wall_ratio", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitle: "tsv",groupTitleColor: "#ddd"},
 
  //   bldg stock
  
