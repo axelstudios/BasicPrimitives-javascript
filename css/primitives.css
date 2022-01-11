@@ -47,7 +47,7 @@ font-face {
 }
 
 .bt-item-frame {
-	border: 1px solid #dddddd;
+	border: 0px solid #dddddd;
 	background: #eeeeee;
 	color: #333333;
 }

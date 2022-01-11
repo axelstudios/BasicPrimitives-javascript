@@ -19,6 +19,34 @@
         items: famdata,
         cursorItem: null,
         hasSelectorCheckbox: primitives.Enabled.False
+
+        groupByType: primitives.GroupByType.Children,
+        alignBylevels: true,
+        hideGrandParentsConnectors: true,
+        enableMatrixLayout: false,
+        minimumMatrixSize: 0,
+
+        pageFitMode: primitives.PageFitMode.FitToPage,
+      orientationType: primitives.OrientationType.Top,
+      verticalAlignment: primitives.VerticalAlignmentType.Middle,
+      horizontalAlignment: primitives.HorizontalAlignmentType.Center,
+      childrenPlacementType: primitives.ChildrenPlacementType.Vertical,
+
+      itemTitleFirstFontColor: primitives.Colors.Black,
+      itemTitleSecondFontColor: primitives.Colors.White,
+
+        arrowsDirection: primitives.GroupByType.Children,
+        showExtraArrows: false,
+        extraArrowsMinimumSpace: 30,
+        connectorType: primitives.ConnectorType.Squared,
+        elbowType: primitives.ElbowType.Round,
+        bevelSize: 4,
+        elbowDotSize: 4,
+        linesType: primitives.LineType.Solid,
+        linesColor: primitives.Colors.Gray,
+        linesWidth: 1,
+
+        itemSize: primitives.Size(350, 60),
       });
 
       var sample3size = sample3.getSize();
