@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+  <title>Basic Primitives Diagrams</title>
+  <script>
+    var frameworksOrder = ["javascript", "pdfkit"];
+    var frameworksLabels = {
+      "javascript": "JavaScript",
+      "pdfkit": "PDFkit"
+    };
+    var preferredFramework = "javascript";
+    var activeFile;
+    var samplesHash = {};
+    var files = [
+      {
+        label: "MyFiles",
+        items: [
+
+          {
+            label: "ComStock Workflow no Matrix",
+            frameworks: {
+              javascript: "samples/javascript.controls/ComStock_no_matrix.html",
+              pdfkit: "samples/pdfkit.plugins/ComStock_no_matrix.html"
+            }
+          },
+          {
+            label: "ComStock Workflow Matrix",
+            frameworks: {
+              javascript: "samples/javascript.controls/ComStock_matrix.html",
+              pdfkit: "samples/pdfkit.plugins/ComStock_matrix.html"
+            }
+          },
+          ]
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var request = new XMLHttpRequest();
+      request.open('GET', 'package.json', true);
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          var package = JSON.parse(this.response);
+          console.log();
+          document.getElementById("version").appendChild(document.createTextNode(package.version));
+        }
+      };
+      request.send();
+
+
+      // build samples hash
+      samplesHash = {};
+      for (var index = 0; index < files.length; index += 1) {
+        var optgroup = files[index];
+        for (var itemIndex = 0; itemIndex < optgroup.items.length; itemIndex += 1) {
+          var option = optgroup.items[itemIndex];
+          var key = index + "-" + itemIndex;
+          samplesHash[key] = option;
+          if(activeFile === undefined) {
+            activeFile = option;
+          }
+        }
+      }
+
+      updateFiles(activeFile);
+      preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
+      resizeWindow();
+      Update();
+
+      var filesElement = document.getElementById("files");
+      filesElement.addEventListener("change", function (event) {
+        var filesElement = document.getElementById("files");
+        activeFile = samplesHash[filesElement.options[filesElement.selectedIndex].getAttribute("data-key")];
+        preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
+        Update();
+      });
+
+
+      var frameworksElement =  document.getElementById("frameworks");
+      frameworksElement.addEventListener("click", function(event) {
+        preferredFramework = event.target.getAttribute("id");
+        preferredFramework = updateFrameworks(activeFile.frameworks, preferredFramework);
+        Update();
+      });
+
+      var openUrlElement = document.getElementById("openURL");
+      openUrlElement.addEventListener("click", function(event) {
+        var frameworkUrl = activeFile.frameworks[preferredFramework];
+        window.location.href = frameworkUrl;
+      });
+
+      window.addEventListener('resize', function (event) {
+        resizeWindow();
+      });
+    });
+
+    function resizeWindow() {
+      var navigationBarElement = document.getElementById("navigationBar");
+      var frameworksBarElement = document.getElementById("frameworksBar");
+      var placeholderElement = document.getElementById("placeholder");
+      placeholderElement.style.top = (navigationBarElement.offsetHeight + frameworksBarElement.offsetHeight) + "px";
+    }
+
+    function Update() {
+      var frameworkUrl = activeFile.frameworks[preferredFramework];
+      var contentElement = document.getElementById("content");
+      contentElement.setAttribute('src', frameworkUrl);
+    }
+
+    function updateFiles(activeFile) {
+      var activeFile;
+      var filesElement = document.getElementById("files");
+      filesElement.innerHTML = "";
+      for (var index = 0; index < files.length; index += 1) {
+        var optgroup = files[index];
+        var optgroupElement = document.createElement('OPTGROUP');
+        optgroupElement.setAttribute("label", optgroup.label);
+
+        for (var itemIndex = 0; itemIndex < optgroup.items.length; itemIndex += 1) {
+          var option = optgroup.items[itemIndex];
+          var optionElement = document.createElement('OPTION');
+          var key = index + "-" + itemIndex;
+          optionElement.setAttribute("data-key", key);
+          optionElement.appendChild(document.createTextNode(option.label));
+          optgroupElement.appendChild(optionElement);
+        }
+        filesElement.appendChild(optgroupElement);
+      }
+    }
+
+    function updateFrameworks(frameworks, preferredFramework) {
+      if(!frameworks.hasOwnProperty(preferredFramework)) {
+        for(var index=0; index < frameworksOrder.length; index+=1) {
+          var framework = frameworksOrder[index];
+          if(frameworks[framework] !== undefined) {
+            preferredFramework = framework;
+          }
+        }
+      }
+
+      var frameworksElement =  document.getElementById("frameworks");
+      frameworksElement.innerHTML = "";
+      for (var index = 0; index < frameworksOrder.length; index += 1) {
+        var framework = frameworksOrder[index];
+        var frameworkElement =  document.createElement('li');
+        frameworkElement.setAttribute('class', "nav-item");
+        frameworkElement.setAttribute('id', framework);
+        frameworkElement.setAttribute('value', framework);
+        var hrefElement = document.createElement('a');
+        hrefElement.setAttribute('class', "nav-link" + (framework === preferredFramework ? " active" : "") + (frameworks[framework] === undefined ? " disabled" : ""));
+        hrefElement.setAttribute('id', framework);
+        hrefElement.setAttribute('value', framework);
+        hrefElement.setAttribute('href', "#");
+        hrefElement.appendChild(document.createTextNode(frameworksLabels[framework]))
+        frameworkElement.appendChild(hrefElement);
+        frameworksElement.appendChild(frameworkElement);
+      }
+      return preferredFramework;
+    }
+  </script>
+</head>
+
+<body style="margin: 0; padding: 0; height: 100%; overflow: hidden;">
+  <nav id="navigationBar" class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://www.basicprimitives.com">BASIC PRIMITIVES</a>&nbsp;v<label id="version"></label>
+      <ul class="navbar-nav me-auto">
+        <select class="form-select form-select-sm ms-2" id="files">
+          <option selected>Choose sample...</option>
+        </select>
+        <li class="nav-item">
+          <a id="openURL" class="nav-link" href="#">
+            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-folder-symlink" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z"/>
+              <path fill-rule="evenodd" d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z"/>
+              <path d="M8.616 10.24l3.182-1.969a.443.443 0 0 0 0-.742l-3.182-1.97c-.27-.166-.616.036-.616.372V6.7c-.857 0-3.429 0-4 4.8 1.429-2.7 4-2.4 4-2.4v.769c0 .336.346.538.616.371z"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <nav id="frameworksBar" class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container-fluid">
+      <ul id="frameworks" class="nav nav-tabs">
+      </ul>
+    </div>
+  </nav>
+  <div id="placeholder" style="position: absolute; top: 200px; left: 0px; right: 0px; bottom: 0px;">
+    <iframe id="content" style="position:absolute; border-style: dotted; border-width: 1px;" width="100%" height="100%" src=""></iframe>
+  </div>
+</body>
+
+</html>

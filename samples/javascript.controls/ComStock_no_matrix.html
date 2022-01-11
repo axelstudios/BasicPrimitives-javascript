@@ -1,34 +1,33 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
-  <title>ComStock Workflow with Dynamic Loading</title>
+  <title>ComStock Workflow All</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script type="text/javascript" src="primitives.js"></script>
-  <script type="text/javascript" src="javascriptsamples.js"></script>
-  <script type="text/javascript" src="data/comstock4_techtree.js"></script>
-  <link href="css/styles.css" media="screen" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../../primitives.js"></script>
+  <script type="text/javascript" src="../../javascriptsamples.js"></script>
+  <script type="text/javascript" src="../data/comstock4_techtree.js"></script>
+  <link href="./css/styles.css" media="screen" rel="stylesheet" type="text/css" />
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-  <link href="css/primitives.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="./css/primitives.css" media="screen" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript">
+  <script type="text/javascript">
     var control = null;
     var timer;
 
     var optionsRender = javascriptsamples.getFamDiagramOptionsRender([], {
       /* Family Diagram Specific Options */
       neighboursSelectionMode: primitives.NeighboursSelectionMode.ParentsChildren,
-      groupByType: primitives.GroupByType.Parents,
+      groupByType: primitives.GroupByType.Children,
       alignBylevels: true,
       hideGrandParentsConnectors: true,
-      enableMatrixLayout: true,
-      minimumMatrixSize: 15,
-      maximumColumnsInMatrix: 8,
+      enableMatrixLayout: false,
+      minimumMatrixSize: 0,
 
       /* On-screen annotations specific options */
       AnnotationOptions: {
@@ -48,18 +47,16 @@
       horizontalAlignment: primitives.HorizontalAlignmentType.Center,
       childrenPlacementType: primitives.ChildrenPlacementType.Horizontal,
       leavesPlacementType: primitives.ChildrenPlacementType.Horizontal,
-      placeAdvisersAboveChildren: true,
-      placeAssistantsAboveChildren: true,
-      maximumColumnsInMatrix: 8,
+      maximumColumnsInMatrix: 10,
       minimalVisibility: primitives.Visibility.Dot,
-      minimumVisibleLevels: 2,
+      minimumVisibleLevels:0,
       selectionPathMode: primitives.SelectionPathMode.FullStack,
 
       hasButtons: primitives.Enabled.True,
       hasSelectorCheckbox: primitives.Enabled.False,
       selectCheckBoxLabel: "Pinned",
-      itemTitleFirstFontColor: primitives.Colors.White,
-      itemTitleSecondFontColor: primitives.Colors.White,
+      itemTitleFirstFontColor: primitives.Colors.Black,
+      itemTitleSecondFontColor: primitives.Colors.Black,
       buttonsPanelSize: 32,
       groupTitlePanelSize: 24,
       checkBoxPanelSize: 24,
@@ -69,7 +66,7 @@
       groupTitleOrientation: primitives.TextOrientationType.RotateRight,
       groupTitleVerticalAlignment: primitives.VerticalAlignmentType.Middle,
       groupTitleHorizontalAlignment: primitives.HorizontalAlignmentType.Center,
-      groupTitleFontSize: "8px",
+      groupTitleFontSize: "13px",
       groupTitleFontFamily: "Roboto",
       groupTitleColor: primitives.Colors.Gray,
       groupTitleFontWeight: "normal",
@@ -93,10 +90,10 @@
       /* Template */
       DefaultTemplateOptions: {
         minimizedItemCornerRadius: 12,
-        minimizedItemSize: new primitives.Size(16, 16),
-        highlightPadding: 4,
+        minimizedItemSize: new primitives.Size(6, 6),
+        highlightPadding: 3,
         minimizedItemShapeType: primitives.ShapeType.None,
-        minimizedItemLineWidth: 1,
+        minimizedItemLineWidth: 0,
         minimizedItemLineType: primitives.LineType.Solid,
         minimizedItemBorderColor: null,
         minimizedItemFillColor: null,
@@ -114,14 +111,14 @@
 
       /* Connectors */
       arrowsDirection: primitives.GroupByType.Children,
-      showExtraArrows: true,
+      showExtraArrows: false,
       extraArrowsMinimumSpace: 30,
       connectorType: primitives.ConnectorType.Squared,
       elbowType: primitives.ElbowType.Round,
       bevelSize: 4,
       elbowDotSize: 4,
       linesType: primitives.LineType.Solid,
-      linesColor: primitives.Colors.Black,
+      linesColor: primitives.Colors.Gray,
       linesWidth: 1,
 
       /* Labels */
@@ -500,7 +497,7 @@
               top: "2px",
               left: "2px",
               width: "316px",
-              height: "4px"
+              height: "8px"
             },
             "class": ["bp-item", "bp-corner-all", "bp-title-frame"]
           }
@@ -551,7 +548,7 @@
 
       <main class="ms-sm-auto px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Matrix and Grouped by Parents</h1>
+          <h1 class="h2">No Matrix Layout and Grouped by Children</h1>
         </div>
         <div id="centerpanel" class="mediaPlaceholder my-2 w-100"></div>
         <div id="southpanel" class="alert alert-primary" style="min-height: 60px;" role="alert">
