@@ -18,7 +18,7 @@
       var sample3 = primitives.FamDiagramPdfkit({
         items: famdata,
         cursorItem: null,
-        hasSelectorCheckbox: primitives.Enabled.False
+        hasSelectorCheckbox: primitives.Enabled.False,
 
         groupByType: primitives.GroupByType.Children,
         alignBylevels: true,
@@ -58,7 +58,7 @@
 
       // draw some text
       doc.fontSize(25)
-        .text('Matrix and Grouped by Parents', 50, 50);
+        .text('ComStock Workflow: Grouped by Parents', 50, 50);
 
       sample3.draw(doc, 50, 100);
 
