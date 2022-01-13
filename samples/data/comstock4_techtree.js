@@ -210,7 +210,7 @@ var famdata = [
  { id: 76, parents: [86,93,101], title: "set_roof_template", itemTitleColor: "#d1f7cd", groupTitle: "measure",placementType: primitives.AdviserPlacementType.Right, groupTitleColor: "#d1f7cd"},
  { id: 77, parents: [45], title: "set_service_water_heating_fuel", itemTitleColor: "#d1f7cd", groupTitle: "measure", groupTitleColor: "#d1f7cd"},
  { id: 78, parents: [86,94,102], title: "set_service_water_heating_template", itemTitleColor: "#d1f7cd", groupTitle: "measure", groupTitleColor: "#d1f7cd"},
- { id: 79, parents: [62], title: "set_space_type_load_subcategories", itemTitleColor: "#d1f7cd", groupTitle: "measure"},
+ { id: 79, parents: [62], title: "set_space_type_load_subcategories", itemTitleColor: "#d1f7cd", groupTitle: "measure", groupTitleColor: "#d1f7cd"},
  { id: 80, parents: [86,95,103], title: "set_wall_template", itemTitleColor: "#d1f7cd", groupTitle: "measure", groupTitleColor: "#d1f7cd"},
  { id: 81, parents: [86,96], title: "set_window_template", itemTitleColor: "#d1f7cd", groupTitle: "measure", groupTitleColor: "#d1f7cd"},
 
