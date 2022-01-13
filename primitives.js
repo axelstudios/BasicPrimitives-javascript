@@ -41324,20 +41324,20 @@ function ItemTemplate(options, itemTemplateConfig) {
       height: 16,
       align: 'left'
     });
-    /* photo */
-
+    /* photo 
     if (itemConfig.image != null) {
       doc.image(itemConfig.image, position.x + 3, position.y + 24);
-    }
-    /* photo frame */
+    }*/
 
+    /* photo frame 
+    doc.rect(position.x + 3, position.y + 24, 50, 60)
+      .stroke('#cccccc');*/
 
-    doc.rect(position.x + 3, position.y + 24, 50, 60).stroke('#cccccc');
     /* description */
 
-    doc.fillColor('black').font('Helvetica', 10).text(itemConfig.description, position.x + 56, position.y + 24, {
+    doc.fillColor('black').font('Helvetica', 10).text(itemConfig.description, position.x + 8, position.y + 24, {
       ellipsis: true,
-      width: contentSize.width - 4 - 56,
+      width: contentSize.width - 4 - 6,
       height: 74,
       align: 'left'
     });
