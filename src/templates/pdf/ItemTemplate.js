@@ -1,3 +1,4 @@
+import { maxDictionaryWordLength } from 'pdfkit-nodejs-webpack';
 import { highestContrast } from '../../common/colors';
 import { Colors }  from '../../enums';
 import Size from '../../graphics/structs/Size';
@@ -31,17 +32,18 @@ export default function ItemTemplate(options, itemTemplateConfig) {
 
     /* title background */
     doc.fillColor(itemTitleColor)
-      .roundedRect(position.x + 2, position.y + 2, (contentSize.width - 4), 18, 2)
+      .roundedRect(position.x + 2, position.y + 2, (contentSize.width - 4), 62, 2)
       .fill();
 
     /* title */
-    doc.fillColor(color)
-      .font('Helvetica', 12)
+    doc.fillColor('black')
+      .font('Helvetica', 11)
       .text(itemConfig.title, position.x + 4, position.y + 7, {
-        ellipsis: true,
+        ellipsis: false,
         width: (contentSize.width - 4 - 4 * 2),
-        height: 16,
+        height: 60,
         align: 'left',
+        linebreak: false,
       });
 
     /* photo 
@@ -54,11 +56,11 @@ export default function ItemTemplate(options, itemTemplateConfig) {
 
     /* description */
     doc.fillColor('black')
-      .font('Helvetica', 10)
-      .text(itemConfig.description, position.x + 8, position.y + 24, {
+      .font('Helvetica', 9)
+      .text(itemConfig.description, position.x + 8, position.y + 66, {
         ellipsis: true,
         width: (contentSize.width - 4 - 6),
-        height: 74,
+        height: 50,
         align: 'left'
       });
     doc.restore();
