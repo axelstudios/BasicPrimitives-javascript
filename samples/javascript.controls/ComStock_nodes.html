@@ -101,12 +101,12 @@
       },
 
       /* Intervals */
-      normalLevelShift: 15,
-      dotLevelShift: 12,
-      lineLevelShift: 12,
-      normalItemsInterval: 12,
-      dotItemsInterval: 12,
-      lineItemsInterval: 20,
+      normalLevelShift: 8,
+      dotLevelShift: 8,
+      lineLevelShift: 8,
+      normalItemsInterval: 8,
+      dotItemsInterval: 8,
+      lineItemsInterval: 8,
       cousinsIntervalMultiplier: 0,
 
       /* Connectors */
@@ -136,14 +136,15 @@
       /* Callout */
       calloutMaximumVisibility: primitives.Visibility.Dot,
       showCallout: true,
-      calloutPlacementOffset: 100,
-      calloutfillColor: "#000000",
+      calloutPlacementOffset: 50,
+      calloutfillColor: "#eee",
       calloutBorderColor: null,
       calloutOffset: 4,
       calloutCornerRadius: 4,
-      calloutPointerWidth: "10%",
+      calloutPointerWidth: "20%",
       calloutLineWidth: 1,
-      calloutOpacity: 0.2,
+      calloutOpacity: 0.5
+      ,
 
       /* Interactivity */
       navigationMode: primitives.NavigationMode.Default,
@@ -339,7 +340,7 @@
           items: [highlightid, parent.id],
           color: primitives.Colors.Navy,
           opacity: 0.4,
-          lineWidth: 6,
+          lineWidth: 4,
           zOrderType: primitives.ZOrderType.Background,
           showArrows: false
         });
@@ -377,7 +378,7 @@
 
       if (data.templateName == "CalloutUnitTemplate") {
         var titleBackground = element.firstChild;
-        titleBackground.style.backgroundColor = itemConfig.itemTitleColor || primitives.Colors.RoyalBlue;
+        titleBackground.style.backgroundColor = itemConfig.itemTitleColor || primitives.Colors.DarkGray;
 
         var title = element.childNodes[1];
         title.textContent = itemConfig.title;
@@ -494,10 +495,10 @@
           {
             "name": "titleBackground",
             "style": {
-              top: "2px",
-              left: "2px",
-              width: "316px",
-              height: "8px"
+              top: "0px",
+              left: "0px",
+              width: "320px",
+              height: "56px"
             },
             "class": ["bp-item", "bp-corner-all", "bp-title-frame"]
           }
@@ -507,11 +508,11 @@
             name: "title",
             "class": "bp-item",
             "style": {
-              top: "8px",
+              top: "2px",
               left: "2px",
-              width: "312px",
-              height: "24px",
-              fontSize: "12px",
+              width: "316px",
+              height: "56px",
+              fontSize: "18px",
               FontFace: "Roboto"
             }
           }
@@ -521,11 +522,11 @@
             name: "description",
             "class": "bp-item",
             "style": {
-              top: "36px",
-              left: "4px",
-              width: "312px",
-              height: "36px",
-              fontSize: "10px"
+              top: "0px",
+              left: "0px",
+              width: "0px",
+              height: "0px",
+              fontSize: "0px"
             }
           }
         ]

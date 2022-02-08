@@ -49,7 +49,8 @@ font-face {
 .bt-item-frame {
 	border: 0px solid #dddddd;
 	background: #eeeeee;
-	color: #333333;
+	color: #000000;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .bp-title {
@@ -60,14 +61,14 @@ font-face {
 	font-size: 14px;
 	line-height: 16px;
 	color: black;
-	padding: 0;
+	padding: 5px;
 }
 
 .bp-title-frame {
-	background: #0000ff;
-	border-width: 0;
+	background: #fff;
+	border-width: 1;
 	color: white;
-	padding: 0;
+	padding: 5px;
 }
 
 .bp-photo-frame {
@@ -82,28 +83,28 @@ font-face {
 }
 
 .bp-cursor-frame {
-	border: 2px solid #fbd850;
+	border: 3px solid #f0c30f;
 	background: #ffffff;
 	color: #eb8f00;
 }
 
 .bp-highlight-frame {
-	border: 1px solid #fbcb09;
-	background: #fdf5ce;
-	color: #c77405;
+	border: 12px solid #fbcb09;
+	background: #f1a618;
+	color: #f0a13b;
 }
 
 .bp-highlight-dot-frame {
-	border: 1px solid #fbcb09;
+	border: 12px solid #fb8a09;
 	background: #fdf5ce;
 	color: #c77405;
 }
 
 .bp-grouptitle-frame {
-	background: #0000ff;
-	border-width: 0;
-	color: #000000;
-	padding: 0;
+	background: #ffffff;
+	border-width: 1;
+	color: #ffffff;
+	padding: 1px;
 }
 
 .bp-selectioncheckbox-frame {

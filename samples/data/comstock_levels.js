@@ -1,26 +1,26 @@
 var famdata = [
 
-  { id: 0, parents: [], title: "year_of_simulation", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here."},
-  { id: 3, parents: [], title: "climate_zone", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here" },
-  { id: 1, parents: [], title: "rotation", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here"},
+  { id: 0, parents: [], title: "year_of_simulation", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: ""},
+  { id: 3, parents: [], title: "climate_zone", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "" },
+  { id: 1, parents: [], title: "rotation", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: ""},
 
 
-  { id: 4, parents: [3], title: "county_id", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here"},
+  { id: 4, parents: [3], title: "county_id", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "", },
 
-  { id: 5, parents: [4], title: "building_type", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here"},
+  { id: 5, parents: [4], title: "building_type", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd", description: "Description of item here", },
 
   
-  { id: 6, parents: [4], title: "state_id", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here"},
+  { id: 6, parents: [4], title: "state_id", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here", },
 
 
-  { id: 301, parents: [5], title: "heating_fuel", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here"},
+  { id: 301, parents: [5], title: "heating_fuel", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd", description: "Description of item here", },
 
 
   { id: 7, parents: [5], title: "hvac_tst_htg_delta_f", itemTitleColor: "#ddd", groupTitle: "tsv", groupTitleColor: "#ddd",},
-  { id: 8, parents: [5], title: "hvac_tst_clg_delta_f", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd" },
+  { id: 8, parents: [5], title: "hvac_tst_clg_delta_f", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd",  },
 
   { id: 9, parents: [5], title: "plugload_sch_base_peak_ratio_type", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd"},
-  { id: 170, parents: [9,5], title: "plugload_sch_weekday_base_peak_ratio", itemTitleColor: "#ddd",  groupTitle: "tsv",groupTitleColor: "#ddd"},
+  { id: 170, parents: [9,5], title: "plugload_sch_weekday_base_peak_ratio", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd"},
   { id: 171, parents: [9,5], title: "plugload_sch_weekend_base_peak_ratio", itemTitleColor: "#ddd",  groupTitle: "tsv",groupTitleColor: "#ddd"},
 
   { id: 10, parents: [5], title: "ltg_sch_base_peak_ratio_type", itemTitleColor: "#ddd", groupTitle: "tsv",groupTitleColor: "#ddd"},
@@ -171,6 +171,8 @@ var famdata = [
  { id: 44, parents: [1], title: "rotation", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
  { id: 45, parents: [16], title: "service_water_heating_fuel", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+
+//  { id: 300, parents: [6], isVisible: false},
 
  { id: 46, parents: [6], title: "state_id", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
