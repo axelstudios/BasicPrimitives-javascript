@@ -68,7 +68,7 @@
       groupTitleOrientation: primitives.TextOrientationType.RotateRight,
       groupTitleVerticalAlignment: primitives.VerticalAlignmentType.Middle,
       groupTitleHorizontalAlignment: primitives.HorizontalAlignmentType.Center,
-      groupTitleFontSize: "13px",
+      groupTitleFontSize: "15px",
       groupTitleFontFamily: "Roboto",
       groupTitleColor: primitives.Colors.Black,
       groupTitleFontWeight: "normal",
@@ -83,7 +83,7 @@
       levelTitleOrientation: primitives.TextOrientationType.Auto,
       levelTitleVerticalAlignment: primitives.VerticalAlignmentType.Middle,
       levelTitleHorizontalAlignment: primitives.HorizontalAlignmentType.Center,
-      levelTitleFontSize: "12px",
+      levelTitleFontSize: "22px",
       levelTitleFontFamily: "Roboto",
       levelTitleFontColor: primitives.Colors.White,
       levelTitleColor: primitives.Colors.Gray,
@@ -104,13 +104,13 @@
       },
 
         /* Intervals */
-        normalLevelShift: 12,
-        dotLevelShift:10,
-        lineLevelShift: 10,
+        normalLevelShift: 35,
+        dotLevelShift:5,
+        lineLevelShift: 3,
         normalItemsInterval: 10,
-        dotItemsInterval: 10,
-        lineItemsInterval: 10,
-        cousinsIntervalMultiplier: 5,
+        dotItemsInterval: 5,
+        lineItemsInterval: 3,
+        cousinsIntervalMultiplier: 1,
 
         /* Connectors */
         arrowsDirection: primitives.GroupByType.Children,
@@ -130,7 +130,7 @@
         labelOrientation: primitives.TextOrientationType.Horizontal,
         labelPlacement: primitives.PlacementType.Top,
         labelOffset: 1,
-        labelFontSize: '10px',
+        labelFontSize: '12px',
         labelFontFamily: 'Roboto',
         labelColor: primitives.Colors.Black,
         labelFontWeight: 'normal',
@@ -421,7 +421,7 @@
       var result = new primitives.TemplateConfig();
       result.name = 'UnitTemplate';
 
-      result.itemSize = new primitives.Size(150, 60);
+      result.itemSize = new primitives.Size(166,70);
       result.minimizedItemSize = new primitives.Size(8, 8);
       result.minimizedItemCornerRadius = 4;
       result.minimizedItemLineWidth = 1;
@@ -446,7 +446,7 @@
               top: '2px',
               left: '2px',
               width: '150px',
-              height: '100%'
+              height: '54px'
             }
           },
           ['div',
@@ -457,7 +457,7 @@
                 top: '2px',
                 left: '2px',
                 width: '150px',
-                height: '40px',
+                height: '55px',
                 fontSize: '12px',
                 Font: 'Roboto',
                 color: '#222'

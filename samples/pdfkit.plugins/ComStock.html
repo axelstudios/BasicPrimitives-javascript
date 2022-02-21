@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Basic Primitives Organizational Diagram PDFKit Plugin Large Hierarchy Demo</title>
+  <title>PDFkit version of ComStock Workflow</title>
   <script type="text/javascript" src="../../pdfkitsamples.js"></script>
   <script type="text/javascript" src="../../primitives.js"></script>
   <script type="text/javascript" src="../data/comstock_levels.js"></script>
@@ -32,7 +32,7 @@
       childrenPlacementType: primitives.ChildrenPlacementType.Vertical,
 
       itemTitleFirstFontColor: primitives.Colors.Black,
-      itemTitleSecondFontColor: primitives.Colors.White,
+      itemTitleSecondFontColor: primitives.Colors.Black,
 
         arrowsDirection: primitives.GroupByType.Children,
         showExtraArrows: false,
@@ -45,7 +45,7 @@
         linesColor: primitives.Colors.Gray,
         linesWidth: 1,
 
-        itemSize: primitives.Size(350, 60),
+        itemSize: primitives.Size(100, 100),
       });
 
       var sample3size = sample3.getSize();
@@ -57,7 +57,7 @@
 
       // draw some text
       doc.fontSize(25)
-        .text('ComStock Workflow: Grouped by Parents', 50, 50);
+        .text('ComStock Workflow', 50, 50);
 
       sample3.draw(doc, 50, 100);
 
