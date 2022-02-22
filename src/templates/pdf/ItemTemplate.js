@@ -32,16 +32,16 @@ export default function ItemTemplate(options, itemTemplateConfig) {
 
     /* title background */
     doc.fillColor(itemTitleColor)
-      .roundedRect(position.x + 2, position.y + 2, (contentSize.width - 4), 62, 2)
+      .roundedRect(position.x + 2, position.y + 2, (contentSize.width - 4), 96, 2)
       .fill();
 
     /* title */
     doc.fillColor('black')
-      .font('Helvetica', 11)
+      .font('Helvetica', 15)
       .text(itemConfig.title, position.x + 4, position.y + 7, {
         ellipsis: false,
         width: (contentSize.width - 4 - 4 * 2),
-        height: 60,
+        height: 96,
         align: 'left',
         linebreak: false,
       });
@@ -55,12 +55,12 @@ export default function ItemTemplate(options, itemTemplateConfig) {
       .stroke('#cccccc');*/
 
     /* description */
-    doc.fillColor('black')
-      .font('Helvetica', 9)
+    doc.fillColor('white')
+      .font('Helvetica', 1)
       .text(itemConfig.description, position.x + 8, position.y + 66, {
         ellipsis: true,
         width: (contentSize.width - 4 - 6),
-        height: 50,
+        height: 1,
         align: 'left'
       });
     doc.restore();
