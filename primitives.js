@@ -76489,13 +76489,13 @@ function ItemTemplate(options, itemTemplateConfig) {
     doc.roundedRect(position.x, position.y, position.width, position.height, 4).lineWidth(_config.itemBorderWidth).stroke('#dddddd');
     /* title background */
 
-    doc.fillColor(itemTitleColor).roundedRect(position.x + 2, position.y + 2, contentSize.width - 4, 62, 2).fill();
+    doc.fillColor(itemTitleColor).roundedRect(position.x + 2, position.y + 2, contentSize.width - 4, 96, 2).fill();
     /* title */
 
-    doc.fillColor('black').font('Helvetica', 11).text(itemConfig.title, position.x + 4, position.y + 7, {
+    doc.fillColor('black').font('Helvetica', 15).text(itemConfig.title, position.x + 4, position.y + 7, {
       ellipsis: false,
       width: contentSize.width - 4 - 4 * 2,
-      height: 60,
+      height: 96,
       align: 'left',
       linebreak: false
     });
@@ -76510,10 +76510,10 @@ function ItemTemplate(options, itemTemplateConfig) {
 
     /* description */
 
-    doc.fillColor('black').font('Helvetica', 9).text(itemConfig.description, position.x + 8, position.y + 66, {
+    doc.fillColor('white').font('Helvetica', 1).text(itemConfig.description, position.x + 8, position.y + 66, {
       ellipsis: true,
       width: contentSize.width - 4 - 6,
-      height: 50,
+      height: 1,
       align: 'left'
     });
     doc.restore();

@@ -28,7 +28,7 @@
       hideGrandParentsConnectors: true,
       enableMatrixLayout: true,
       minimumMatrixSize: 2,
-      maximumColumnsInMatrix: 10,
+      maximumColumnsInMatrix: 20,
 
       /* On-screen annotations specific options */
       AnnotationOptions: {
@@ -105,13 +105,13 @@
       },
 
         /* Intervals */
-        normalLevelShift: 12,
+        normalLevelShift: 30,
         dotLevelShift:10,
         lineLevelShift: 10,
         normalItemsInterval: 12,
         dotItemsInterval: 12,
-        lineItemsInterval: 20,
-        cousinsIntervalMultiplier: 3,
+        lineItemsInterval: 5,
+        cousinsIntervalMultiplier: 2,
 
         /* Connectors */
         arrowsDirection: primitives.GroupByType.Children,
@@ -422,7 +422,7 @@
       var result = new primitives.TemplateConfig();
       result.name = 'UnitTemplate';
 
-      result.itemSize = new primitives.Size(100, 100);
+      result.itemSize = new primitives.Size(116, 116);
       result.minimizedItemSize = new primitives.Size(8, 8);
       result.minimizedItemCornerRadius = 4;
       result.minimizedItemLineWidth = 1;
@@ -448,7 +448,7 @@
               left: '2px',
               right: '2px',
               width: '100px',
-              height: '96px'
+              height: '100px'
             }
           },
           ['div',
@@ -456,11 +456,11 @@
               'name': 'title',
               'class': 'bp-item',
               'style': {
-                top: '0px',
-                left: '0px',
-                right: '0px',
+                top: '2px',
+                left: '2px',
+                right: '2px',
                 width: '100px',
-                height: '96px',
+                height: '100px',
                 fontSize: '13px',
                 Font: 'Roboto',
                 color: '#222'

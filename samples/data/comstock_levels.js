@@ -105,8 +105,8 @@ var famdata = [
  
   { id: 27, parents: [172], title: "ltg_sch_weekday_base_peak_ratio", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
   { id: 28, parents: [173], title: "ltg_sch_weekend_base_peak_ratio", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
-  { id: 120, parents: [10], title: "ltg_sch_base_peak_ratio_type", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
-
+/*   { id: 120, parents: [10], title: "ltg_sch_base_peak_ratio_type", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
+/* 
  { id: 24, parents: [156], title: "energy_code_compliance_during_original_building_construction", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 110, parents: [157], title: "energy_code_compliance_exterior_lighting", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 111, parents: [158], title: "energy_code_compliance_hvac", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
@@ -115,22 +115,22 @@ var famdata = [
  { id: 114, parents: [161], title: "energy_code_compliance_roof", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 115, parents: [162], title: "energy_code_compliance_service_water_heating", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 116, parents: [163], title: "energy_code_compliance_walls", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
- { id: 117, parents: [164], title: "energy_code_compliance_windows", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+ { id: 117, parents: [164], title: "energy_code_compliance_windows", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
 
 
  { id: 130, parents: [200], title: "energy_code_followed_during_original_building_construction", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
+/* 
+ { id: 32, parents: [190], title: "energy_code_in_force_during_original_building_construction", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
 
- { id: 32, parents: [190], title: "energy_code_in_force_during_original_building_construction", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
-
- { id: 140, parents: [191], title: "energy_code_in_force_during_last_exterior_lighting_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+/*  { id: 140, parents: [191], title: "energy_code_in_force_during_last_exterior_lighting_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 141, parents: [192], title: "energy_code_in_force_during_last_hvac_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 142, parents: [193], title: "energy_code_in_force_during_last_interior_equipment_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 143, parents: [194], title: "energy_code_in_force_during_last_interior_lighting_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 144, parents: [195], title: "energy_code_in_force_during_last_roof_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 145, parents: [196], title: "energy_code_in_force_during_last_service_water_heating_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 146, parents: [197], title: "energy_code_in_force_during_last_walls_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
- { id: 147, parents: [198], title: "energy_code_in_force_during_last_windows_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+ { id: 147, parents: [198], title: "energy_code_in_force_during_last_windows_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
 
 
  { id: 33, parents: [202], title: "energy_code_followed_during_last_exterior_lighting_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
@@ -143,7 +143,7 @@ var famdata = [
  { id: 96, parents: [209], title: "energy_code_followed_during_last_windows_replacement", itemTitleColor: "#a7e3f4", groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
  { id: 83, parents: [154], title: "aspect_ratio", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
- { id: 84, parents: [153], title: "building_shape", itemTitleColor: "#a7e3f4", groupTitle: "BStock",  placementType: primitives.AdviserPlacementType.Right, groupTitleColor: "#a7e3f4"},
+/*  { id: 84, parents: [153], title: "building_shape", itemTitleColor: "#a7e3f4", groupTitle: "BStock",  placementType: primitives.AdviserPlacementType.Right, groupTitleColor: "#a7e3f4"}, */
  { id: 85, parents: [5], title: "building_type", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 88, parents: [152], title: "building_subtype", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 86, parents: [3], title: "climate_zone", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
@@ -151,7 +151,7 @@ var famdata = [
 
  { id: 36, parents: [11], title: "number_stories", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
- { id: 38, parents: [9], title: "plugload_sch_base_peak_ratio_type", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+/*  { id: 38, parents: [9], title: "plugload_sch_base_peak_ratio_type", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
  { id: 39, parents: [170], title: "plugload_sch_weekday_base_peak_ratio", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 40, parents: [171], title: "plugload_sch_weekend_base_peak_ratio", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
@@ -166,7 +166,7 @@ var famdata = [
  { id: 125, parents: [21], title: "hvac_tst_htg_sp_f", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 126, parents: [25], title: "hvac_night_variability", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
- { id: 42, parents: [23], title: "region", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+/*  { id: 42, parents: [23], title: "region", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
  { id: 43, parents: [13], title: "rentable_area", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 44, parents: [1], title: "rotation", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
 
@@ -174,26 +174,26 @@ var famdata = [
 
 //  { id: 300, parents: [6], isVisible: false},
 
- { id: 46, parents: [6], title: "state_id", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+/*  { id: 46, parents: [6], title: "state_id", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
 
  { id: 47, parents: [18], title: "weekday_duration", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 48, parents: [17], title: "weekday_start_time", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 49, parents: [20], title: "weekend_duration", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 50, parents: [19], title: "weekend_start_time", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 51, parents: [201], title: "window_wall_ratio", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+/* 
+ { id: 60, parents: [174], title: "year_bin_of_original_building_construction", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
 
- { id: 60, parents: [174], title: "year_bin_of_original_building_construction", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
-
- { id: 52, parents: [175], title: "year_bin_of_last_exterior_lighting_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+/*  { id: 52, parents: [175], title: "year_bin_of_last_exterior_lighting_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 53, parents: [176], title: "year_bin_of_last_hvac_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 54, parents: [177], title: "year_bin_of_last_interior_equipment_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 55, parents: [178], title: "year_bin_of_last_interior_lighting_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 56, parents: [179], title: "year_bin_of_last_roof_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 57, parents: [180], title: "year_bin_of_last_service_water_heating_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
  { id: 58, parents: [181], title: "year_bin_of_last_walls_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
- { id: 59, parents: [182], title: "year_bin_of_last_windows_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},
+ { id: 59, parents: [182], title: "year_bin_of_last_windows_replacement", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, */
 
- { id: 61, parents: [12], title: "year_built", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"}, 
+/*  { id: 61, parents: [12], title: "year_built", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", groupTitleColor: "#a7e3f4"},  */
 
  { id: 62, parents: [0], title: "year_of_simulation", itemTitleColor: "#a7e3f4",  groupTitle: "BStock", description: "", groupTitleColor: "#a7e3f4"},
  
